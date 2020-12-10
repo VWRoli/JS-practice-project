@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <title>Tip calculator</title>
+  </head>
+  <body>
+    <div class="overlay">
+      <main>
+        <form action="">
+          <h1>Tip Calculator</h1>
+          <div class="group">
+            <label for="bill-value">How much was your bill?</label>
+            <input type="number" name="bill-value" id="bill-value" />
+          </div>
+          <div class="group">
+            <label for="sharing">How many people share the bill?</label>
+            <input type="number" name="sharing" id="sharing" />
+          </div>
+          <div class="group">
+            <p>How was your service?</p>
+            <select name="dropdown" id="dropdown" placeholder="Select one...">
+              <option value="">Select here...</option>
+              <option value="10">10%</option>
+              <option value="15">15%</option>
+              <option value="20">20%</option>
+            </select>
+          </div>
+          <button type="submit">Calculate</button>
+        </form>
+        <div class="bottom"></div>
+      </main>
+    </div>
+
+    <script src="./js/script.js"></script>
+  </body>
+</html>
