@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
+* {
+  font-family: 'Lato', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+/*? SHOWCASE */
+.showcase {
+  background: url(../img/drum-set-1839383_1920.jpg) no-repeat center/cover;
+  height: 100vh;
+  filter: grayscale(100%);
+}
+.overlay {
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 100vh;
+}
+
+/*? DRUMS */
+.container {
+  border: 1px solid red;
+  width: 60%;
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+}
+.drums {
+}
