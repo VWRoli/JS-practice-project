@@ -23,7 +23,9 @@
 
 .container {
   border-radius: 10px;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(
+    6px
+  ); /*lets you apply graphical effects such as blurring or color shifting to the area behind an element.*/
   display: flex;
   flex-direction: column;
   align-items: center;
