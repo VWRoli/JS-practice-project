@@ -20,7 +20,7 @@
 
 /*? BACKGROUND */
 .showcase {
-  background: url(../img/bg.jpg);
+  background: url(../img/bg.jpg) no-repeat center/cover;
   height: 100vh;
   position: relative;
 }
@@ -54,7 +54,9 @@
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
   grid-gap: 0.5rem;
+  grid-auto-rows: 2rem;
   justify-content: center;
 }
 .btn {
@@ -62,7 +64,6 @@
   background-color: var(--number-btn-color);
   line-height: 2rem;
   width: 2rem;
-  height: 2rem;
   cursor: pointer;
 }
 .btn-top {
@@ -71,8 +72,10 @@
 .btn-side {
   background-color: var(--equal-btn-color);
 }
-.h-2 {
+.btn-equal {
   grid-row: span 2;
+  border-radius: 25px;
+  line-height: 4.5rem;
 }
 i {
   font-size: 0.8rem;
