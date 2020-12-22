@@ -1,4 +1,42 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+/*? UTILITIES*/
+:root {
+  --primary-color: #e66465;
+  --secondary-color: #9198e5;
+}
 * {
   font-family: 'Roboto', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 25px;
+  color: #fff;
+}
+
+/*? BACKGROUND */
+.showcase {
+  background: url(../img/bg.jpg);
+  height: 100vh;
+  position: relative;
+}
+
+/*? CALCULATOR */
+.calc-container {
+  background-color: #000;
+  border: 5px solid;
+  border-radius: ;
+  width: fit-content;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.display {
+  height: 2rem;
+  border: 1px solid orange;
+}
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
 }
