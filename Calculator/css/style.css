@@ -42,12 +42,21 @@
 }
 /*? DISPLAY */
 .display {
-  height: 3rem;
+  height: 4rem;
   background-color: rgb(94, 94, 94);
   margin-bottom: 1rem;
 }
 .small-display {
   min-height: 30%;
+  width: 100%;
+  border: 1px solid red;
+  text-align: right;
+}
+.main-display {
+  border: 1px solid red;
+  text-align: right;
+  min-height: 70%;
+  font-size: 2rem;
 }
 
 /*? BUTTONS */
@@ -59,7 +68,9 @@
   grid-auto-rows: 2rem;
   justify-content: center;
 }
-.btn {
+.btn,
+.btn-delete,
+.btn-clear {
   border-radius: 50%;
   background-color: var(--number-btn-color);
   line-height: 2rem;
@@ -76,6 +87,7 @@
   grid-row: span 2;
   border-radius: 25px;
   line-height: 4.5rem;
+  cursor: pointer;
 }
 i {
   font-size: 0.8rem;

@@ -9,6 +9,7 @@
       integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/mathjs/lib/browser/math.js"></script>
     <link rel="stylesheet" href="./css/style.css" />
     <title>Calculator</title>
   </head>
@@ -19,12 +20,13 @@
       <div class="calc-content">
         <div class="display">
           <div class="small-display"></div>
+          <div class="main-display"></div>
         </div>
         <div class="buttons">
-          <div class="btn btn-c btn-top">C</div>
+          <div class="btn-clear btn-top">C</div>
           <div class="btn btn-divide btn-top">/</div>
           <div class="btn btn-multi btn-top">x</div>
-          <div class="btn btn-delete btn-top">
+          <div class="btn-delete btn-top">
             <i class="fas fa-backspace"></i>
           </div>
 
@@ -41,7 +43,7 @@
           <div class="btn btn-1 btn-number">1</div>
           <div class="btn btn-2 btn-number">2</div>
           <div class="btn btn-3 btn-number">3</div>
-          <div class="btn btn-equal btn-side">=</div>
+          <div class="btn-equal btn-side">=</div>
 
           <div class="btn btn-percentage btn-number">%</div>
           <div class="btn btn-0 btn-number">0</div>
@@ -49,5 +51,6 @@
         </div>
       </div>
     </div>
+    <script src="./js/main.js"></script>
   </body>
 </html>
