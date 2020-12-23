@@ -11,32 +11,36 @@ let userInput = '';
 
 for (let i = 0; i < btnEL.length; i++)
   btnEL[i].addEventListener('click', function () {
-    userInput += btnEL[i].textContent;
-    //display user input
-    smallDisplayEL.textContent = userInput;
-    console.log(userInput);
+    if (mainDisplayEl.textContent !== '') {
+      userInput = '';
+      userInput += btnEL[i].textContent;
+      smallDisplayEL.textContent = userInput;
+      mainDisplayEl.textContent = '';
+    } else {
+      userInput += btnEL[i].textContent;
+      //display user input
+      smallDisplayEL.textContent = userInput;
+    }
   });
 
 //Results
 document.querySelector('.btn-equal').addEventListener('click', function () {
   const result = math.evaluate(userInput);
-  mainDisplayEl.textContent = result;
+  mainDisplayEl.textContent = (result.toFixed(7) * 10) / 10;
 });
 
 //Clear button
 document.querySelector('.btn-clear').addEventListener('click', function () {
   userInput = '';
-  console.log(userInput);
   smallDisplayEL.textContent = '';
   mainDisplayEl.textContent = '';
 });
 
 //Backspace button
 delEl.addEventListener('click', function () {
-  if (userInput.length > 0) {
+  if (userInput.length > 0 && mainDisplayEl.textContent === '') {
     let deleteLastCh = userInput.slice(0, -1);
     userInput = deleteLastCh;
     smallDisplayEL.textContent = userInput;
-    console.log(userInput);
   }
 });
