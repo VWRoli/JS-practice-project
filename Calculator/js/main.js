@@ -27,6 +27,8 @@ document.querySelector('.btn-equal').addEventListener('click', function () {
 document.querySelector('.btn-clear').addEventListener('click', function () {
   userInput = '';
   console.log(userInput);
+  smallDisplayEL.textContent = '';
+  mainDisplayEl.textContent = '';
 });
 
 //Backspace button
@@ -34,6 +36,7 @@ delEl.addEventListener('click', function () {
   if (userInput.length > 0) {
     let deleteLastCh = userInput.slice(0, -1);
     userInput = deleteLastCh;
+    smallDisplayEL.textContent = userInput;
     console.log(userInput);
   }
 });

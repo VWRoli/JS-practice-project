@@ -49,11 +49,9 @@
 .small-display {
   min-height: 30%;
   width: 100%;
-  border: 1px solid red;
   text-align: right;
 }
 .main-display {
-  border: 1px solid red;
   text-align: right;
   min-height: 70%;
   font-size: 2rem;
