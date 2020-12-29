@@ -34,7 +34,7 @@ h1 {
   -webkit-box-shadow: 0px 0px 15px 5px #000000;
   box-shadow: 0px 0px 15px 5px #000000;
 }
-#counter-display {
+.counter-display {
   font-size: 5rem;
   color: #24b2fa;
 }
@@ -45,8 +45,15 @@ h1 {
   border-radius: 15px;
   cursor: pointer;
   color: #24b2fa;
+  outline: none;
 }
 .btn:hover {
   background-color: #24b2fa;
   color: #fff;
+}
+.positive {
+  color: #41c47a;
+}
+.negative {
+  color: #f75353;
 }
