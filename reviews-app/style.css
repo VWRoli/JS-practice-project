@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
+/*? GLOBAL */
+:root {
+  --mainColor: rgb(194, 226, 255);
+  --secondaryColor: #f0f8ff;
+  --alternativeColor: #00abed;
+  --textColor: rgb(32, 32, 32);
+}
+* {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+}
+body {
+  position: relative;
+  height: 100vh;
+  background-color: var(--mainColor);
+  color: var(--textColor);
+}
+.wrapper {
+  max-width: 785px;
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.container {
+  background-color: var(--secondaryColor);
+  border-radius: 15px;
+  padding: 1rem;
+}
+.container > * {
+  margin: 1rem;
+}
+h1 {
+  font-size: 3rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+}
+
+/*? IMAGE*/
+.img-container {
+  width: 239px;
+  height: 239px;
+  margin: auto;
+  border-radius: 50%;
+  background: #fff url(https://source.unsplash.com/pZTVa_Gt1f8/) no-repeat
+    center/cover;
+  box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+/*? TEXT */
+.full-name {
+  font-weight: 500;
+}
+.job-title {
+  color: var(--alternativeColor);
+  font-weight: 500;
+}
+.review {
+  background-color: #fff;
+  padding: 1rem;
+  position: relative;
+  border-radius: 15px;
+  min-height: 100px;
+}
+.review p {
+  font-size: 18px;
+}
+.review #left {
+  /*TODO should not get into text */
+  position: absolute;
+  top: 0.5rem;
+  left: 1rem;
+}
+.review #right {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+}
+
+/*? SLIDERS */
+.sliders {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 1rem;
+}
+.sliders .lines {
+  height: 15px;
+  background-color: var(--mainColor);
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.sliders .lines:hover {
+  background-color: var(--alternativeColor);
+}
+.active {
+  /*TODO get overwritten for some reason */
+  background-color: #000;
+}
