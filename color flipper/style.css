@@ -19,7 +19,7 @@ body {
 }
 h1 {
   text-align: center;
-  background-color: #eee;
+  background-color: #f4f4f4;
   padding: 1rem 0;
   border-bottom: 1px solid #8a8a8a;
   -webkit-box-shadow: 0px 0px 15px 5px #000000;
@@ -46,6 +46,7 @@ h2 {
   cursor: pointer;
   transition: all 0.2s;
   font-weight: 700;
+  outline: none;
 }
 #random-color:hover {
   background-color: rgb(29, 29, 29);
