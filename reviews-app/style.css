@@ -47,8 +47,7 @@ h1 {
   height: 239px;
   margin: auto;
   border-radius: 50%;
-  background: #fff url(https://source.unsplash.com/pZTVa_Gt1f8/) no-repeat
-    center/cover;
+  background: #fff;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
   -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
@@ -60,6 +59,7 @@ h1 {
 }
 .job-title {
   color: var(--alternativeColor);
+  font-size: 0.8rem;
   font-weight: 500;
 }
 .review {
@@ -92,6 +92,9 @@ h1 {
   grid-template-columns: repeat(5, 1fr);
   grid-gap: 1rem;
 }
+.active {
+  background-color: var(--alternativeColor);
+}
 .sliders .lines {
   height: 5px;
   background-color: var(--mainColor);
@@ -100,9 +103,6 @@ h1 {
   cursor: pointer;
 }
 .sliders .lines:hover {
-  background-color: var(--alternativeColor);
-}
-#active {
   background-color: var(--alternativeColor);
 }
 
@@ -130,8 +130,7 @@ h1 {
 }
 
 #button:hover {
-  background-color: var(--alternativeColor);
-  color: var(--lightBg);
+  border-color: var(--alternativeColor);
 }
 
 /*? MEDIA */
