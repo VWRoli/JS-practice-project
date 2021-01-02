@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
+/*? GLOBAL */
+:root {
+  --mainBgColor: #f3f3f3;
+  --secondaryBgColor: #fff;
+  --hoverColor: #f5465d;
+  --mainTextColor: #444;
+}
+/* .modal-buttons #btn-1 {
+    background-image: linear-gradient(to top left, #39b385, #9be15d);
+  }
+  .modal-buttons #btn-2 {
+    background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  }
+  .modal-buttons #btn-3 {
+    background-image: linear-gradient(to top left, #ffb003, #ffcb03); */
+* {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--mainTextColor);
+}
+body {
+  background-color: var(--mainBgColor);
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+h1 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+/*? GRID */
+.grid,
+.game-over {
+  background-color: var(--secondaryBgColor);
+  border-radius: 25px;
+  padding: 2rem;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+}
+.grid-wrapper {
+  display: grid;
+  grid-gap: 0.5rem;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: var(--mainTextColor);
+}
+.grid-item {
+  /* border: 8px solid green; */
+  background-color: #fff;
+  height: 120px;
+  width: 120px;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/*? GAME STATS */
+.game-stats {
+  margin-top: 1rem;
+}
+.game-stats span {
+  font-weight: 500;
+}
+
+/*? ASSIGN */
+.assign-x {
+  background-image: linear-gradient(to top left, #e52a5a, #ff585f);
+  padding: 0rem 1rem;
+  border-radius: 25px;
+}
+.assign-o {
+  background-image: linear-gradient(to top left, #39b385, #9be15d);
+  padding: 0.5rem 0.5rem;
+  border-radius: 25px;
+}
+
+/*? GAME OVER */
+.overlay {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(2px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+.game-over {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  text-align: center;
+}
+#new-game {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid var(--mainTextColor);
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background-color: var(--secondaryBgColor);
+}
+#new-game:hover {
+  background-image: linear-gradient(to top left, #ffb003, #ffcb03);
+}
+.hidden {
+  display: none;
+}

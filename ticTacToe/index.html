@@ -3,10 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>TicTacToe</title>
   </head>
   <body>
+    <div class="container">
+      <h1>Tic Tac Toe</h1>
+      <div class="grid">
+        <div class="grid-wrapper">
+          <div class="grid-item grid-0"></div>
+          <div class="grid-item grid-1"></div>
+          <div class="grid-item grid-2"></div>
+          <div class="grid-item grid-3"></div>
+          <div class="grid-item grid-4"></div>
+          <div class="grid-item grid-5"></div>
+          <div class="grid-item grid-6"></div>
+          <div class="grid-item grid-7"></div>
+          <div class="grid-item grid-8"></div>
+        </div>
+      </div>
+      <div class="game-stats">
+        <h2>Game stats:</h2>
+        <p>Player 1: <span id="player-1">0</span> wins</p>
+        <p>Player 2: <span id="player-2">0</span> wins</p>
+        <p>Draws: <span id="draw">0</span></p>
+      </div>
+    </div>
+    <div class="game-over hidden">
+      <h2>Player 1 Won!</h2>
+      <button id="new-game">New Game</button>
+    </div>
+    <div class="overlay hidden"></div>
     <script src="main.js"></script>
   </body>
 </html>
