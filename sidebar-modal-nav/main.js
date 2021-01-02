@@ -37,3 +37,9 @@ arrowEl.addEventListener('click', function () {
   sidebarEl.classList.toggle('move-in');
   sidebarEl.classList.toggle('move-out');
 });
+/////////////////////////////////////////////////////////
+//Toggle navbar
+document.querySelector('#burger-icon').addEventListener('click', function () {
+  document.querySelector('.navbar').classList.toggle('active');
+  console.log('click');
+});
