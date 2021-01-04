@@ -34,7 +34,7 @@ h1 {
 }
 /*? GRID */
 .grid,
-.game-over {
+.game-message {
   background-color: var(--secondaryBgColor);
   border-radius: 25px;
   padding: 2rem;
@@ -89,13 +89,16 @@ h1 {
   width: 100vw;
   height: 100vh;
 }
-.game-over {
+.game-message {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
   text-align: center;
+}
+.game-message h2 {
+  font-weight: 300;
 }
 #new-game {
   margin-top: 1rem;
