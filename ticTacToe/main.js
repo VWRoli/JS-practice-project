@@ -23,9 +23,12 @@ Steps:
 const gridItemsAll = document.querySelectorAll('.grid-item');
 const gameMessageEl = document.querySelector('.game-message');
 const overlayEl = document.querySelector('.overlay');
+const messageEl = document.querySelector('#message');
 
-const players = [0, 1];
+const players = [0, 1, 2]; //2 is draw
 const userInput = Array(9).fill('');
+const scores = [0, 0, 0];
+
 let activePlayer = 0;
 let gameActive = true;
 
@@ -41,8 +44,8 @@ for (let i = 0; i < gridItemsAll.length; i++) {
         ].innerHTML = `<i class="fas fa-times fa-7x assign-x"></i>`;
         //collecting user input
         userInput.splice([i], 1, 0);
+        checkDraw(userInput);
         checkWinner(userInput);
-        console.log(gameActive);
         activePlayer = 1;
       } else if (activePlayer === 1 && gridItemsAll[i].innerHTML === '') {
         //Place O
@@ -52,9 +55,8 @@ for (let i = 0; i < gridItemsAll.length; i++) {
 
         //collecting user input
         userInput.splice([i], 1, 1);
-
+        checkDraw(userInput);
         checkWinner(userInput);
-        console.log(gameActive);
         activePlayer = 0;
       }
     }
@@ -76,7 +78,7 @@ function checkWinner(userInput) {
       userInput[6] === activePlayer)
   ) {
     //Check who is the winner
-    console.log(checkWhoWon(activePlayer));
+    console.log(activePlayer);
     gameActive = false;
   } else if (
     //vertical check
@@ -91,7 +93,7 @@ function checkWinner(userInput) {
       userInput[2] === activePlayer)
   ) {
     //Check who is the winner
-    console.log(checkWhoWon(activePlayer));
+    console.log(activePlayer);
     gameActive = false;
   } else if (
     //diagonal check
@@ -103,20 +105,26 @@ function checkWinner(userInput) {
       userInput[2] === activePlayer)
   ) {
     //Check who is the winner
-    console.log(checkWhoWon(activePlayer));
+    console.log(activePlayer);
     gameActive = false;
   }
-  checkDraw(userInput);
-  checkWhoWon(userInput);
 }
-const checkWhoWon = (activePlayer) => {
-  activePlayer === 0 ? `Player 0 won` : `Player 1 Won`;
+
+//Draw functionality
+const checkDraw = function (userInput) {
+  isDraw = userInput.every((el) => el !== '');
+  if (isDraw === true) {
+    console.log(isDraw);
+    //openGameMessage();
+  }
 };
 
-const checkDraw = function (userInput) {
-  const isDraw = userInput.some((el) => el === '');
-  if (isDraw === false) {
-    gameMessageEl.classList.toggle('hidden');
-    overlayEl.classList.toggle('hidden');
+const openGameMessage = () => {
+  gameMessageEl.classList.toggle('hidden');
+  overlayEl.classList.toggle('hidden');
+  if (activePlayer === 0) {
+    messageEl.textContent = `Player 1 Won!`;
+  } else if (activePlayer === 1) {
+    messageEl.textContent = `Player 2 Won!`;
   }
 };

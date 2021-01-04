@@ -96,6 +96,7 @@ h1 {
   transform: translate(-50%, -50%);
   z-index: 100;
   text-align: center;
+  padding: 2rem 4rem;
 }
 .game-message h2 {
   font-weight: 300;
