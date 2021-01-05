@@ -6,14 +6,6 @@
   --hoverColor: #f5465d;
   --mainTextColor: #444;
 }
-/* .modal-buttons #btn-1 {
-    background-image: linear-gradient(to top left, #39b385, #9be15d);
-  }
-  .modal-buttons #btn-2 {
-    background-image: linear-gradient(to top left, #e52a5a, #ff585f);
-  }
-  .modal-buttons #btn-3 {
-    background-image: linear-gradient(to top left, #ffb003, #ffcb03); */
 * {
   font-family: 'Poppins', sans-serif;
   font-weight: 200;

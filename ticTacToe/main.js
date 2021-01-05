@@ -1,39 +1,64 @@
 'use script';
-
-/* GAME LOGIC
-- player 1 is always X
-- Player 2 is always O 
-- in every round it changes who starts the game  */
-/* 
-Steps:
-- clicking active player puts down mark 
-- has to be its own mark 
-- save marks in an array
-- check if has 3 next to each other
-  - check if X or O
-- if no continue
-- draw
-- if yes game won     
-    - pop up window
-    - add score
-    - new game button 
-        - clear board  
-*/
 //Variables
 const gridItemsAll = document.querySelectorAll('.grid-item');
 const gameMessageEl = document.querySelector('.game-message');
 const overlayEl = document.querySelector('.overlay');
 const messageEl = document.querySelector('#message');
+const player1El = document.querySelectorAll('.player-1');
+const player2El = document.querySelectorAll('.player-2');
+const drawEl = document.querySelectorAll('.draw');
 
 const players = [0, 1, 2]; //2 is draw
-const userInput = Array(9).fill('');
+let userInput = Array(9).fill('');
+//Player1, player 2 and draws
 const scores = [0, 0, 0];
+let drawCounter = 0;
 
 let activePlayer = 0;
+//Starterplayer = true player 0 will start the game, false player 1 will start the game
+//starterplayer always changes
+let starterPlayer = true;
+let winStatePlayer1 = false;
+let winStatePlayer2 = false;
+let isDraw = false;
 let gameActive = true;
 
-//active Player XO marking
+//Determine who will start the game, first time always player 1 starts
+const determineStarterPlayer = () => {
+  if (starterPlayer === true) {
+    starterPlayer === false;
+    activePlayer = 0;
+  } else {
+    starterPlayer === true;
+    activePlayer = 1;
+  }
+};
 
+console.log(starterPlayer, activePlayer);
+//Score system
+const addScores = () => {
+  if (winStatePlayer1) {
+    scores[0]++;
+  }
+  if (winStatePlayer2) {
+    scores[1]++;
+  }
+  if (isDraw) {
+    scores[2]++;
+  }
+  showScores(scores);
+};
+
+//Show scores
+const showScores = (arr) => {
+  for (let i = 0; i < player1El.length; i++) {
+    player1El[i].textContent = arr[0];
+    player2El[i].textContent = arr[1];
+    drawEl[i].textContent = arr[2];
+  }
+};
+showScores(scores);
+//active Player putting down XO
 for (let i = 0; i < gridItemsAll.length; i++) {
   gridItemsAll[i].addEventListener('click', function () {
     if (gameActive) {
@@ -44,7 +69,6 @@ for (let i = 0; i < gridItemsAll.length; i++) {
         ].innerHTML = `<i class="fas fa-times fa-7x assign-x"></i>`;
         //collecting user input
         userInput.splice([i], 1, 0);
-        checkDraw(userInput);
         checkWinner(userInput);
         activePlayer = 1;
       } else if (activePlayer === 1 && gridItemsAll[i].innerHTML === '') {
@@ -55,7 +79,6 @@ for (let i = 0; i < gridItemsAll.length; i++) {
 
         //collecting user input
         userInput.splice([i], 1, 1);
-        checkDraw(userInput);
         checkWinner(userInput);
         activePlayer = 0;
       }
@@ -63,7 +86,31 @@ for (let i = 0; i < gridItemsAll.length; i++) {
   });
 }
 
-//check winner
+//check who is the winner
+const whoWon = (activePlayer) => {
+  if (activePlayer === 0) {
+    winStatePlayer1 = true;
+    addScores();
+    openGameMessage();
+  } else if (activePlayer === 1) {
+    winStatePlayer2 = true;
+    addScores();
+    openGameMessage();
+  }
+};
+
+//Draw functionality
+const checkDraw = function (userInput) {
+  if (winStatePlayer1 === false && winStatePlayer2 === false) {
+    isDraw = userInput.every((el) => el !== '');
+    if (isDraw) {
+      addScores();
+      openGameMessage();
+    }
+  }
+};
+
+//check winning conditions
 function checkWinner(userInput) {
   //horizontal check
   if (
@@ -78,7 +125,7 @@ function checkWinner(userInput) {
       userInput[6] === activePlayer)
   ) {
     //Check who is the winner
-    console.log(activePlayer);
+    whoWon(activePlayer);
     gameActive = false;
   } else if (
     //vertical check
@@ -93,7 +140,8 @@ function checkWinner(userInput) {
       userInput[2] === activePlayer)
   ) {
     //Check who is the winner
-    console.log(activePlayer);
+    //console.log(userInput);
+    whoWon(activePlayer);
     gameActive = false;
   } else if (
     //diagonal check
@@ -105,26 +153,44 @@ function checkWinner(userInput) {
       userInput[2] === activePlayer)
   ) {
     //Check who is the winner
-    console.log(activePlayer);
+    whoWon(activePlayer);
     gameActive = false;
   }
+  checkDraw(userInput);
 }
-
-//Draw functionality
-const checkDraw = function (userInput) {
-  isDraw = userInput.every((el) => el !== '');
-  if (isDraw === true) {
-    console.log(isDraw);
-    //openGameMessage();
-  }
-};
 
 const openGameMessage = () => {
   gameMessageEl.classList.toggle('hidden');
   overlayEl.classList.toggle('hidden');
-  if (activePlayer === 0) {
+  if (winStatePlayer1) {
     messageEl.textContent = `Player 1 Won!`;
-  } else if (activePlayer === 1) {
+  }
+  if (winStatePlayer2) {
     messageEl.textContent = `Player 2 Won!`;
   }
+  if (isDraw) {
+    messageEl.textContent = `It's a draw!`;
+  }
 };
+//New game button
+document.querySelector('#new-game').addEventListener('click', function () {
+  //
+  determineStarterPlayer();
+  console.log(starterPlayer, activePlayer);
+  //remove message box
+  gameMessageEl.classList.toggle('hidden');
+  overlayEl.classList.toggle('hidden');
+  //clear board
+  for (let i = 0; i < gridItemsAll.length; i++) {
+    gridItemsAll[i].innerHTML = ``;
+  }
+  //clear userinput array
+  userInput.length = 0;
+  userInput = Array(9).fill('');
+  //change game status
+  gameActive = true;
+  //set back win states
+  winStatePlayer1 = false;
+  winStatePlayer2 = false;
+  isDraw = false;
+});
