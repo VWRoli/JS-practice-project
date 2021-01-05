@@ -25,16 +25,17 @@ let gameActive = true;
 
 //Determine who will start the game, first time always player 1 starts
 const determineStarterPlayer = () => {
-  if (starterPlayer === true) {
-    starterPlayer === false;
-    activePlayer = 0;
-  } else {
-    starterPlayer === true;
-    activePlayer = 1;
+  switch (starterPlayer) {
+    case true:
+      starterPlayer = false;
+      activePlayer = 1;
+      break;
+    default:
+      starterPlayer = true;
+      activePlayer = 0;
   }
 };
 
-console.log(starterPlayer, activePlayer);
 //Score system
 const addScores = () => {
   if (winStatePlayer1) {
@@ -58,6 +59,7 @@ const showScores = (arr) => {
   }
 };
 showScores(scores);
+
 //active Player putting down XO
 for (let i = 0; i < gridItemsAll.length; i++) {
   gridItemsAll[i].addEventListener('click', function () {
@@ -172,11 +174,11 @@ const openGameMessage = () => {
     messageEl.textContent = `It's a draw!`;
   }
 };
+
 //New game button
 document.querySelector('#new-game').addEventListener('click', function () {
   //
   determineStarterPlayer();
-  console.log(starterPlayer, activePlayer);
   //remove message box
   gameMessageEl.classList.toggle('hidden');
   overlayEl.classList.toggle('hidden');
