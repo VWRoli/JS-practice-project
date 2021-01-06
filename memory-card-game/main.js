@@ -26,12 +26,48 @@ const cardsArray = [
 
 let time = 0;
 let timer;
+let currentArray = [];
+let currentElement;
 
 //Flip cards
-for (let i = 0; i < cardEl.length; i++)
-  cardEl[i].addEventListener('click', function () {
-    cardWrapperEl[i].classList.toggle('active');
-  });
+const flipCards = () => {
+  for (let i = 0; i < cardEl.length; i++)
+    cardEl[i].addEventListener('click', function () {
+      cardWrapperEl[i].classList.toggle('active');
+      currentElement = cardBackEl[i].innerHTML;
+      //Log userinput
+      if (currentArray.length < 2) {
+        //add clicked item
+        currentArray.push(currentElement);
+        console.log(currentArray);
+
+        if (currentArray[0] === currentArray[1] && currentArray.length === 2) {
+          console.log('correct');
+          //remove cards from array
+
+          //empty current
+          currentArray = [];
+          console.log(currentArray);
+          //   if(cardsArray === []){
+          //won
+          //   }
+        } else if (currentArray.length === 2) {
+          //clear current
+          currentArray = [];
+          console.log(currentArray);
+          //flip it back and go on
+          setTimeout(() => {
+            turnDownCards();
+          }, 1000);
+        }
+      } else {
+        //flip open cards over
+        //turnDownCards();
+        //console.log(currentArray);
+        //reset current
+      }
+    });
+};
 
 //Start game
 startBtnEl.addEventListener('click', function () {
@@ -40,6 +76,7 @@ startBtnEl.addEventListener('click', function () {
   gameEl.classList.toggle('hidden');
   shuffleArray(cardsArray);
   setCards();
+  flipCards();
 });
 
 //Start counter
@@ -65,6 +102,14 @@ resetBtnEl.addEventListener('click', function () {
   timerEl.textContent = `00:00`;
   //Start timer again
   startTimer(time);
+  //reset cards
+  turnDownCards();
+
+  //had to delay because transition is 1s
+  setTimeout(() => {
+    shuffleArray(cardsArray);
+    setCards();
+  }, 1000);
 });
 
 //Set cards
@@ -76,11 +121,19 @@ const setCards = () => {
 };
 
 //schuffle array
-
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
+  array.slice();
+  console.log(array);
   return array;
 }
+
+//Turn cards over
+const turnDownCards = () => {
+  //remove active class from all
+  for (let i = 0; i < cardEl.length; i++)
+    cardWrapperEl[i].classList.remove('active');
+};

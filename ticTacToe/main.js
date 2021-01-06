@@ -142,7 +142,6 @@ function checkWinner(userInput) {
       userInput[2] === activePlayer)
   ) {
     //Check who is the winner
-    //console.log(userInput);
     whoWon(activePlayer);
     gameActive = false;
   } else if (

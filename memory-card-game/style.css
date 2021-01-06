@@ -130,3 +130,19 @@ body {
 .hidden {
   display: none;
 }
+/*? MEDIA */
+@media only screen and (max-width: 732px) {
+  * {
+    font-size: 18px;
+  }
+}
+
+@media only screen and (max-width: 575px) {
+  * {
+    font-size: 16px;
+  }
+  .grid-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+    margin: 1rem;
+  }
+}
