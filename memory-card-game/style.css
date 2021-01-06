@@ -24,7 +24,10 @@ body {
 
 .showcase,
 .game {
-  transition: 1s;
+  -webkit-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
 }
 /*? Showcase */
 .btn {
