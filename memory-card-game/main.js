@@ -28,6 +28,16 @@ let time = 0;
 let timer;
 let currentArray = [];
 let currentElement;
+let tempIndex = [];
+// let arr = ['a', 'b', 'c', 'd', 'e'];
+// console.log(arr);
+// //SLICE
+// //does not mutate the original array
+// console.log(arr.slice(2)); //slicing off at arr[2], all the way to the end, it returns a new array
+// console.log(arr.slice(2, 4)); //giving start and end parameters, end is not included in the output
+// console.log(arr.slice(-2)); //with minus we can slice from the end of the array
+// console.log(arr.splice(1, 1));
+// console.log(arr.slice()); //without parameters it creates a copy of the original array, its the same as with the spread operator
 
 //Flip cards
 const flipCards = () => {
@@ -35,16 +45,37 @@ const flipCards = () => {
     cardEl[i].addEventListener('click', function () {
       cardWrapperEl[i].classList.toggle('active');
       currentElement = cardBackEl[i].innerHTML;
+
+      //Log index number of card clicks
+      tempIndex.push(cardsArray.indexOf(cardsArray[i]));
+
       //Log userinput
       if (currentArray.length < 2) {
         //add clicked item
-        currentArray.push(currentElement);
-        console.log(currentArray);
 
         if (currentArray[0] === currentArray[1] && currentArray.length === 2) {
-          console.log('correct');
           //remove cards from array
+          cardsArray.forEach((el) => {
+            if (currentArray[0] === el.icon) {
+              console.log(el.icon);
+              //Remove from cardsArray
+              tempIndex.sort((a, b) => a - b);
+              for (let i = tempIndex.length - 1; i >= 0; i--)
+                cardsArray.splice(tempIndex[i], 1, 'x');
+              console.log(cardsArray);
+              tempIndex = [];
+              //Check for win, win = every array element is X
+              const wonGame = cardsArray.every((el) => el === 'x');
+              if (wonGame) {
+                console.log('Game won');
+                //Stop clock
+                //record high score
+                //Display Messasge
+              }
+            }
+          });
 
+          ////////////////////////////////////////
           //empty current
           currentArray = [];
           console.log(currentArray);
@@ -126,9 +157,9 @@ function shuffleArray(array) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  array.slice();
-  console.log(array);
-  return array;
+  const newCardsArray = array.slice();
+  console.log(newCardsArray);
+  return newCardsArray;
 }
 
 //Turn cards over
