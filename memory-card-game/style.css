@@ -130,6 +130,19 @@ body {
 .hidden {
   display: none;
 }
+/*? DISPLAY-MESSAGE */
+.display-message {
+  text-align: center;
+  padding: 4rem;
+  background-color: var(--secondaryBgColor);
+  border-radius: 10px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.66);
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.66);
+}
+.display-message h1 {
+  font-size: 2rem;
+}
 /*? MEDIA */
 @media only screen and (max-width: 732px) {
   * {

@@ -29,15 +29,6 @@ let timer;
 let currentArray = [];
 let currentElement;
 let tempIndex = [];
-// let arr = ['a', 'b', 'c', 'd', 'e'];
-// console.log(arr);
-// //SLICE
-// //does not mutate the original array
-// console.log(arr.slice(2)); //slicing off at arr[2], all the way to the end, it returns a new array
-// console.log(arr.slice(2, 4)); //giving start and end parameters, end is not included in the output
-// console.log(arr.slice(-2)); //with minus we can slice from the end of the array
-// console.log(arr.splice(1, 1));
-// console.log(arr.slice()); //without parameters it creates a copy of the original array, its the same as with the spread operator
 
 //Flip cards
 const flipCards = () => {
@@ -52,7 +43,8 @@ const flipCards = () => {
       //Log userinput
       if (currentArray.length < 2) {
         //add clicked item
-
+        currentArray.push(currentElement);
+        console.log(currentArray);
         if (currentArray[0] === currentArray[1] && currentArray.length === 2) {
           //remove cards from array
           cardsArray.forEach((el) => {
