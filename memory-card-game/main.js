@@ -7,7 +7,9 @@ const startBtnEl = document.querySelector('.start-btn');
 const showcaseEl = document.querySelector('.showcase');
 const gameEl = document.querySelector('.game');
 const timerEl = document.querySelector('.timer');
-const resetBtnEl = document.querySelector('.btn-reset');
+const resetBtnEl = document.querySelectorAll('.btn-reset');
+const currentTimeEl = document.querySelector('.current-time');
+const displayMessage = document.querySelector('.display-message');
 
 const cardsArray = [
   { icon: `<i class="fas fa-dog fa-4x"></i>`, color: `#945a38` },
@@ -29,6 +31,7 @@ let timer;
 let currentArray = [];
 let currentElement;
 let tempIndex = [];
+let wonGame = false;
 
 //Flip cards
 const flipCards = () => {
@@ -45,21 +48,32 @@ const flipCards = () => {
         //add clicked item
         currentArray.push(currentElement);
         console.log(currentArray);
+        console.log(cardsArray);
         if (currentArray[0] === currentArray[1] && currentArray.length === 2) {
           //remove cards from array
           cardsArray.forEach((el) => {
             if (currentArray[0] === el.icon) {
               console.log(el.icon);
               //Remove from cardsArray
+              console.log(tempIndex);
               tempIndex.sort((a, b) => a - b);
-              for (let i = tempIndex.length - 1; i >= 0; i--)
+              for (let i = tempIndex.length - 1; i >= 0; i--) {
                 cardsArray.splice(tempIndex[i], 1, 'x');
-              console.log(cardsArray);
+                console.log(cardsArray);
+                console.log(tempIndex[i]);
+                //make cards disappear
+                document
+                  .querySelector(`.item-${tempIndex[i] + 1}`)
+                  .classList.add('visibility');
+              }
               tempIndex = [];
+
               //Check for win, win = every array element is X
-              const wonGame = cardsArray.every((el) => el === 'x');
+              wonGame = cardsArray.every((el) => el === 'x');
               if (wonGame) {
                 console.log('Game won');
+                displayMessage.classList.remove('hidden');
+                gameEl.classList.toggle('hidden');
                 //Stop clock
                 //record high score
                 //Display Messasge
@@ -67,40 +81,33 @@ const flipCards = () => {
             }
           });
 
-          ////////////////////////////////////////
           //empty current
           currentArray = [];
           console.log(currentArray);
-          //   if(cardsArray === []){
-          //won
-          //   }
         } else if (currentArray.length === 2) {
           //clear current
           currentArray = [];
+          tempIndex = [];
           console.log(currentArray);
           //flip it back and go on
           setTimeout(() => {
             turnDownCards();
           }, 1000);
         }
-      } else {
-        //flip open cards over
-        //turnDownCards();
-        //console.log(currentArray);
-        //reset current
       }
     });
 };
 
 //Start game
-startBtnEl.addEventListener('click', function () {
+const startNewGame = () => {
   startTimer(time);
   showcaseEl.classList.toggle('hidden');
   gameEl.classList.toggle('hidden');
   shuffleArray(cardsArray);
   setCards();
   flipCards();
-});
+};
+startBtnEl.addEventListener('click', startNewGame);
 
 //Start counter
 const startTimer = (time) => {
@@ -111,13 +118,20 @@ const startTimer = (time) => {
     //Convert time to minutes and seconds
     let min = String(Math.trunc(time / 60)).padStart(2, 0);
     let sec = String(time % 60).padStart(2, 0);
+
     //Show time
     timerEl.textContent = `${min}:${sec}`;
+    //Show time in display message
+    if (wonGame) {
+      currentTimeEl.textContent = `${min}:${sec}`;
+      clearInterval(timer);
+      time = 0;
+    }
   }, 1000);
 };
 
 //Reset button
-resetBtnEl.addEventListener('click', function () {
+const resetGame = () => {
   //Reset timer
   clearInterval(timer);
   time = 0;
@@ -125,15 +139,26 @@ resetBtnEl.addEventListener('click', function () {
   timerEl.textContent = `00:00`;
   //Start timer again
   startTimer(time);
+  //
+  displayMessage.classList.add('hidden');
   //reset cards
-  turnDownCards();
+  //turnDownCards();
+  cardEl.forEach((el) => el.classList.remove('visibility'));
+  //cardEl.forEach((el) => el.classList.remove('visibility'));
+  //
+  // const removeVisibility = ()=>{
 
+  // }
+  // cardEl.classList.remove('visibility');
+  //
   //had to delay because transition is 1s
   setTimeout(() => {
     shuffleArray(cardsArray);
     setCards();
   }, 1000);
-});
+};
+
+resetBtnEl.forEach((btn) => btn.addEventListener('click', resetGame));
 
 //Set cards
 const setCards = () => {

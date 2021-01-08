@@ -59,6 +59,10 @@ body {
   height: 7rem;
   width: 7rem;
   perspective: 1000px; /*3d effect*/
+  -webkit-transition: all 1s linear;
+  -moz-transition: all 1s linear;
+  -o-transition: all 1s linear;
+  transition: all 1s linear;
 }
 .card-wrapper {
   position: relative;
@@ -130,6 +134,11 @@ body {
 .hidden {
   display: none;
 }
+.visibility {
+  /* opacity: 0; */
+  transform: scale(0);
+  pointer-events: none;
+}
 /*? DISPLAY-MESSAGE */
 .display-message {
   text-align: center;
@@ -142,6 +151,9 @@ body {
 }
 .display-message h1 {
   font-size: 2rem;
+}
+.display-message h2 {
+  margin: 1rem;
 }
 /*? MEDIA */
 @media only screen and (max-width: 732px) {
