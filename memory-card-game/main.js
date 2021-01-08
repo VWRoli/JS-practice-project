@@ -27,7 +27,7 @@ const cardsArray = [
 ];
 
 let time = 0;
-let timer;
+let timer, min, sec;
 let currentArray = [];
 let currentElement;
 let tempIndex = [];
@@ -50,6 +50,14 @@ const flipCards = () => {
         console.log(currentArray);
         console.log(cardsArray);
         if (currentArray[0] === currentArray[1] && currentArray.length === 2) {
+          ///////////////////////////////////////////////////
+          //Do not delete it but put elements into new array
+          //create new array  for matches
+          //put matched cards into this array
+          //make this cards disappear
+          //
+          //checkForWin(wonGame);
+          ///////////////////////////////////////////////////
           //remove cards from array
           cardsArray.forEach((el) => {
             if (currentArray[0] === el.icon) {
@@ -70,14 +78,7 @@ const flipCards = () => {
 
               //Check for win, win = every array element is X
               wonGame = cardsArray.every((el) => el === 'x');
-              if (wonGame) {
-                console.log('Game won');
-                displayMessage.classList.remove('hidden');
-                gameEl.classList.toggle('hidden');
-                //Stop clock
-                //record high score
-                //Display Messasge
-              }
+              checkForWin(wonGame);
             }
           });
 
@@ -116,17 +117,11 @@ const startTimer = (time) => {
     const now = new Date();
     time++;
     //Convert time to minutes and seconds
-    let min = String(Math.trunc(time / 60)).padStart(2, 0);
-    let sec = String(time % 60).padStart(2, 0);
+    min = String(Math.trunc(time / 60)).padStart(2, 0);
+    sec = String(time % 60).padStart(2, 0);
 
     //Show time
     timerEl.textContent = `${min}:${sec}`;
-    //Show time in display message
-    if (wonGame) {
-      currentTimeEl.textContent = `${min}:${sec}`;
-      clearInterval(timer);
-      time = 0;
-    }
   }, 1000);
 };
 
@@ -169,14 +164,15 @@ const setCards = () => {
 };
 
 //schuffle array
+console.log(cardsArray);
 function shuffleArray(array) {
+  array.slice();
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  const newCardsArray = array.slice();
-  console.log(newCardsArray);
-  return newCardsArray;
+  console.log(array);
+  return array;
 }
 
 //Turn cards over
@@ -184,4 +180,18 @@ const turnDownCards = () => {
   //remove active class from all
   for (let i = 0; i < cardEl.length; i++)
     cardWrapperEl[i].classList.remove('active');
+};
+
+//Check for win
+const checkForWin = (boolean) => {
+  if (wonGame) {
+    //Display Messasge
+    displayMessage.classList.remove('hidden');
+    gameEl.classList.toggle('hidden');
+    //record high score
+    currentTimeEl.textContent = `${min}:${sec}`;
+    //Stop clock
+    clearInterval(timer);
+    time = 0;
+  }
 };
