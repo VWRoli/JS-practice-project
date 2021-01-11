@@ -29,6 +29,7 @@ const cardsArray = [
 let time = 0;
 let timer, min, sec;
 let currentArray = [];
+let winArray = [];
 let currentElement;
 let tempIndex = [];
 let wonGame = false;
@@ -51,39 +52,32 @@ const flipCards = () => {
         console.log(cardsArray);
         if (currentArray[0] === currentArray[1] && currentArray.length === 2) {
           ///////////////////////////////////////////////////
-          //Do not delete it but put elements into new array
-          //create new array  for matches
           //put matched cards into this array
-          //make this cards disappear
-          //
-          //checkForWin(wonGame);
-          ///////////////////////////////////////////////////
-          //remove cards from array
-          cardsArray.forEach((el) => {
-            if (currentArray[0] === el.icon) {
-              console.log(el.icon);
-              //Remove from cardsArray
-              console.log(tempIndex);
-              tempIndex.sort((a, b) => a - b);
-              for (let i = tempIndex.length - 1; i >= 0; i--) {
-                cardsArray.splice(tempIndex[i], 1, 'x');
-                console.log(cardsArray);
-                console.log(tempIndex[i]);
-                //make cards disappear
-                document
-                  .querySelector(`.item-${tempIndex[i] + 1}`)
-                  .classList.add('visibility');
-              }
-              tempIndex = [];
+          winArray.push(currentArray[0]);
+          winArray.push(currentArray[1]);
+          console.log(winArray);
+          console.log(tempIndex);
 
-              //Check for win, win = every array element is X
-              wonGame = cardsArray.every((el) => el === 'x');
-              checkForWin(wonGame);
-            }
-          });
+          //make this cards disappear
+          for (let i = 0; i < tempIndex.length; i++) {
+            console.log(tempIndex[i]);
+            document
+              .querySelector(`.item-${tempIndex[i] + 1}`)
+              .classList.add('invisibility');
+          }
+          //Win check
+          if (winArray.length === cardsArray.length) {
+            wonGame = true;
+            winArray = [];
+            tempIndex = [];
+          } else {
+            wonGame = false;
+          }
+          checkForWin(wonGame);
 
           //empty current
           currentArray = [];
+          tempIndex = [];
           console.log(currentArray);
         } else if (currentArray.length === 2) {
           //clear current
@@ -136,16 +130,11 @@ const resetGame = () => {
   startTimer(time);
   //
   displayMessage.classList.add('hidden');
+  gameEl.classList.remove('hidden');
   //reset cards
-  //turnDownCards();
-  cardEl.forEach((el) => el.classList.remove('visibility'));
-  //cardEl.forEach((el) => el.classList.remove('visibility'));
-  //
-  // const removeVisibility = ()=>{
+  turnDownCards();
+  cardEl.forEach((el) => el.classList.remove('invisibility'));
 
-  // }
-  // cardEl.classList.remove('visibility');
-  //
   //had to delay because transition is 1s
   setTimeout(() => {
     shuffleArray(cardsArray);
