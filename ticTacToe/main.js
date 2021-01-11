@@ -1,4 +1,4 @@
-'use script';
+'use strict';
 //Variables
 const gridItemsAll = document.querySelectorAll('.grid-item');
 const gameMessageEl = document.querySelector('.game-message');
@@ -8,11 +8,10 @@ const player1El = document.querySelectorAll('.player-1');
 const player2El = document.querySelectorAll('.player-2');
 const drawEl = document.querySelectorAll('.draw');
 
-const players = [0, 1, 2]; //2 is draw
+const players = [0, 1];
 let userInput = Array(9).fill('');
 //Player1, player 2 and draws
-const scores = [0, 0, 0];
-let drawCounter = 0;
+const scores = [0, 0, 0]; //player1, player2 and draw
 
 let activePlayer = 0;
 //Starterplayer = true player 0 will start the game, false player 1 will start the game
@@ -176,7 +175,6 @@ const openGameMessage = () => {
 
 //New game button
 document.querySelector('#new-game').addEventListener('click', function () {
-  //
   determineStarterPlayer();
   //remove message box
   gameMessageEl.classList.toggle('hidden');

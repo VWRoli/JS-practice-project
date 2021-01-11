@@ -4,9 +4,13 @@ Collection place for my Javascript projects.
 
 # Check out my Javascript games hosted on [Codepen](https://codepen.io/VWRoli)
 
+[Memory Card Game](https://codepen.io/VWRoli/pen/MWjqVpg)
+
+Good old memory card game. Just turn over the cards and find the matching ones.
+
 [Guitar Fretboard memorization](https://codepen.io/VWRoli/pen/yLaKmNE)
 
-Guess the notes behind the gray dot.
+Guess the notes on the fretboard.
 
 [Tic Tac Toe game](https://codepen.io/VWRoli/pen/oNzddwg)
 
