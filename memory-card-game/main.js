@@ -37,57 +37,56 @@ let wonGame = false;
 //Flip cards
 const flipCards = () => {
   for (let i = 0; i < cardEl.length; i++)
-    cardEl[i].addEventListener('click', function () {
-      cardWrapperEl[i].classList.toggle('active');
-      currentElement = cardBackEl[i].innerHTML;
+    cardEl[i].addEventListener('click', function (e) {
+      const faceUp = e.target.classList.contains('active');
+      if (faceUp === false) {
+        cardWrapperEl[i].classList.toggle('active');
+        currentElement = cardBackEl[i].innerHTML;
 
-      //Log index number of card clicks
-      tempIndex.push(cardsArray.indexOf(cardsArray[i]));
+        //Log index number of card clicks
+        tempIndex.push(cardsArray.indexOf(cardsArray[i]));
 
-      //Log userinput
-      if (currentArray.length < 2) {
-        //add clicked item
-        currentArray.push(currentElement);
-        console.log(currentArray);
-        console.log(cardsArray);
-        if (currentArray[0] === currentArray[1] && currentArray.length === 2) {
-          ///////////////////////////////////////////////////
-          //put matched cards into this array
-          winArray.push(currentArray[0]);
-          winArray.push(currentArray[1]);
-          console.log(winArray);
-          console.log(tempIndex);
+        //Log userinput
+        if (currentArray.length < 2) {
+          //add clicked item
+          currentArray.push(currentElement);
+          if (
+            currentArray[0] === currentArray[1] &&
+            currentArray.length === 2
+          ) {
+            //put matched cards into this array
+            winArray.push(currentArray[0]);
+            winArray.push(currentArray[1]);
 
-          //make this cards disappear
-          for (let i = 0; i < tempIndex.length; i++) {
-            console.log(tempIndex[i]);
-            document
-              .querySelector(`.item-${tempIndex[i] + 1}`)
-              .classList.add('invisibility');
-          }
-          //Win check
-          if (winArray.length === cardsArray.length) {
-            wonGame = true;
-            winArray = [];
+            //make this cards disappear
+            for (let i = 0; i < tempIndex.length; i++) {
+              document
+                .querySelector(`.item-${tempIndex[i] + 1}`)
+                .classList.add('invisibility');
+            }
+
+            //Win check
+            if (winArray.length === cardsArray.length) {
+              wonGame = true;
+              winArray = [];
+              tempIndex = [];
+            } else {
+              wonGame = false;
+            }
+            checkForWin(wonGame);
+
+            //empty current
+            currentArray = [];
             tempIndex = [];
-          } else {
-            wonGame = false;
+          } else if (currentArray.length === 2) {
+            //clear current
+            currentArray = [];
+            tempIndex = [];
+            //flip it back and go on
+            setTimeout(() => {
+              turnDownCards();
+            }, 1000);
           }
-          checkForWin(wonGame);
-
-          //empty current
-          currentArray = [];
-          tempIndex = [];
-          console.log(currentArray);
-        } else if (currentArray.length === 2) {
-          //clear current
-          currentArray = [];
-          tempIndex = [];
-          console.log(currentArray);
-          //flip it back and go on
-          setTimeout(() => {
-            turnDownCards();
-          }, 1000);
         }
       }
     });
@@ -124,9 +123,7 @@ const resetGame = () => {
   //Reset timer
   clearInterval(timer);
   time = 0;
-  //Show time
   timerEl.textContent = `00:00`;
-  //Start timer again
   startTimer(time);
   //
   displayMessage.classList.add('hidden');
@@ -134,7 +131,6 @@ const resetGame = () => {
   //reset cards
   turnDownCards();
   cardEl.forEach((el) => el.classList.remove('invisibility'));
-
   //had to delay because transition is 1s
   setTimeout(() => {
     shuffleArray(cardsArray);
@@ -153,14 +149,12 @@ const setCards = () => {
 };
 
 //schuffle array
-console.log(cardsArray);
 function shuffleArray(array) {
   array.slice();
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [array[i], array[j]] = [array[j], array[i]];
   }
-  console.log(array);
   return array;
 }
 

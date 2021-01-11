@@ -104,6 +104,7 @@ body {
   transform: rotateY(180deg);
   display: grid;
   place-items: center;
+  pointer-events: none;
 }
 .card-back i {
   color: var(--mainBgColor);
