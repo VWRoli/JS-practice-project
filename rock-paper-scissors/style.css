@@ -44,6 +44,7 @@ h1 {
 .player button {
   margin: 1rem;
   border: none;
+  outline: none;
 }
 .player-option {
   padding: 1.5rem 1.5rem;
@@ -83,8 +84,4 @@ h1 {
   padding: 1.5rem 1.5rem;
   border-radius: 25px;
   background: linear-gradient(to top left, #c8c8c8, #a8a7a7);
-}
-.computer-option i {
-  opacity: 0;
-  visibility: none;
 }
