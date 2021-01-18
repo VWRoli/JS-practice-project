@@ -34,6 +34,7 @@ h1 {
   -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
   display: grid;
   grid-template-columns: 1fr 1fr;
+  position: relative;
 }
 /*? PLAYER */
 .player {
@@ -100,4 +101,20 @@ h1 {
 }
 #next-round:hover {
   background: linear-gradient(to bottom right, #ffb003, #ffcb03);
+}
+
+.message {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: var(--secondaryBgColor);
+  border-radius: 25px;
+  font-size: 2rem;
+  padding: 1rem;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
