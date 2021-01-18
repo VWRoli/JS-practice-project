@@ -24,3 +24,67 @@ h1 {
   text-align: center;
   margin-bottom: 1rem;
 }
+/*? CONTAINER */
+.wrapper {
+  background-color: var(--secondaryBgColor);
+  border-radius: 25px;
+  padding: 2rem;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  -webkit-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  -moz-box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+/*? PLAYER */
+.player {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.player button {
+  margin: 1rem;
+  border: none;
+}
+.player-option {
+  padding: 1.5rem 1.5rem;
+  border-radius: 25px;
+  cursor: pointer;
+  transform: rotate(90deg);
+}
+.option-rock {
+  background: linear-gradient(to top left, #e52a5a, #ff585f);
+  grid-column: span 2;
+  justify-self: center;
+}
+.option-rock:hover {
+  background: linear-gradient(to bottom right, #e52a5a, #ff585f);
+}
+.option-paper {
+  background: linear-gradient(to top left, #39b385, #9be15d);
+}
+.option-paper:hover {
+  background: linear-gradient(to bottom right, #39b385, #9be15d);
+}
+.option-scissor {
+  background: linear-gradient(to top left, #ffb003, #ffcb03);
+  transform: rotate(180deg);
+  transform: scale(-1, 1);
+}
+.option-scissor:hover {
+  background: linear-gradient(to bottom right, #ffb003, #ffcb03);
+}
+/*? COMPUTER */
+.computer {
+  display: grid;
+  place-content: center;
+  border-left: 1px solid var(--mainTextColor);
+}
+.computer-option {
+  padding: 1.5rem 1.5rem;
+  border-radius: 25px;
+  background: linear-gradient(to top left, #c8c8c8, #a8a7a7);
+}
+.computer-option i {
+  opacity: 0;
+  visibility: none;
+}
