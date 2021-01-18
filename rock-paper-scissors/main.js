@@ -2,6 +2,9 @@
 //Variables
 const playerEl = document.querySelector('.player');
 const computerEl = document.querySelector('.computer-option');
+const nextRound = document.querySelector('#next-round');
+
+let winner, computer;
 
 const rps = [
   {
@@ -29,43 +32,44 @@ playerEl.addEventListener('click', function (e) {
   //Guard clause
   if (!clicked) return;
 
-  computer();
+  computerRandom();
+  console.log(computer);
   compare(player, computer);
 });
 
 //Random generator
-const computer = () => {
+const computerRandom = () => {
   let randomNumber = Math.floor(Math.random() * rps.length);
 
-  let computer = rps[randomNumber].option;
+  computer = rps[randomNumber].option;
   computerEl.innerHTML = rps[randomNumber].html;
   computerEl.style.background = rps[randomNumber].bgColor;
   return computer;
 };
 
-let winner;
 //comparison
 const compare = (player, computer) => {
   if (player === computer) {
     //tie
+    console.log(`tie`);
   } else if (player === `rock` && computer === `paper`) {
+    console.log(`computer won`);
     winner = computer;
-    win(winner);
   } else if (player === `rock` && computer === `scissors`) {
+    console.log(`player won`);
     winner = player;
-    win(winner);
   } else if (player === `paper` && computer === `rock`) {
+    console.log(`player won`);
     winner = player;
-    win(winner);
   } else if (player === `paper` && computer === `scissors`) {
+    console.log(`computer won`);
     winner = computer;
-    win(winner);
   } else if (player === `scissors` && computer === `rock`) {
+    console.log(`computer won`);
     winner = computer;
-    win(winner);
   } else if (player === `scissors` && computer === `paper`) {
+    console.log(`player won`);
     winner = player;
-    win(winner);
   }
 };
 
@@ -73,3 +77,9 @@ const compare = (player, computer) => {
 const win = (winner) => {
   console.log(`${winner} Won!`);
 };
+
+//next round button
+nextRound.addEventListener('click', function () {
+  computerEl.innerHTML = ``;
+  computerEl.style.background = `linear-gradient(to top left, #c8c8c8, #a8a7a7)`;
+});

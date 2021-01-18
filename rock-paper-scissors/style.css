@@ -84,4 +84,20 @@ h1 {
   padding: 1.5rem 1.5rem;
   border-radius: 25px;
   background: linear-gradient(to top left, #c8c8c8, #a8a7a7);
+  height: 10rem;
+  width: 10rem;
+}
+/*? NEXT GAME */
+#next-round {
+  margin-top: 1rem;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 2px solid var(--mainTextColor);
+  outline: none;
+  cursor: pointer;
+  font-size: 1rem;
+  background: linear-gradient(to top left, #ffb003, #ffcb03);
+}
+#next-round:hover {
+  background: linear-gradient(to bottom right, #ffb003, #ffcb03);
 }
