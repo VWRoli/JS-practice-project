@@ -24,44 +24,48 @@ const rps = [
 //Clicking buttons
 playerEl.addEventListener('click', function (e) {
   const clicked = e.target.closest('.player-option');
-  let playerOption = clicked.dataset.options;
-  console.log(playerOption);
+  let player = clicked.dataset.options;
+  console.log(player);
   //Guard clause
   if (!clicked) return;
+
+  computer();
+  compare(player, computer);
 });
 
 //Random generator
 const computer = () => {
   let randomNumber = Math.floor(Math.random() * rps.length);
 
-  let computerOption = rps[randomNumber].option;
-  console.log(computerOption);
+  let computer = rps[randomNumber].option;
   computerEl.innerHTML = rps[randomNumber].html;
   computerEl.style.background = rps[randomNumber].bgColor;
+  return computer;
 };
-computer();
 
+let winner;
 //comparison
-const compare = (playerOption, computerOption) => {
-  if (playerOption === computerOption) {
+const compare = (player, computer) => {
+  if (player === computer) {
     //tie
-  } else if (playerOption === rock && computerOption === paper) {
-    //won
-  } else if (playerOption === rock && computerOption === scissors) {
-    //player or computer === paper
-    //won
-  } else if (playerOption === paper && computerOption === rock) {
-    //player or computer === scissors
-    //won
-  } else if (playerOption === paper && computerOption === scissors) {
-    //player or computer === scissors
-    //won
-  } else if (playerOption === scissors && computerOption === rock) {
-    //player or computer === scissors
-    //won
-  } else if (playerOption === scissors && computerOption === paper) {
-    //player or computer === scissors
-    //won
+  } else if (player === `rock` && computer === `paper`) {
+    winner = computer;
+    win(winner);
+  } else if (player === `rock` && computer === `scissors`) {
+    winner = player;
+    win(winner);
+  } else if (player === `paper` && computer === `rock`) {
+    winner = player;
+    win(winner);
+  } else if (player === `paper` && computer === `scissors`) {
+    winner = computer;
+    win(winner);
+  } else if (player === `scissors` && computer === `rock`) {
+    winner = computer;
+    win(winner);
+  } else if (player === `scissors` && computer === `paper`) {
+    winner = player;
+    win(winner);
   }
 };
 
