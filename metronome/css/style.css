@@ -1,18 +1,161 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
-/*? GLOBAL */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500;600;700&display=swap');
+/*************? GLOBAL ******************/
 :root {
   --mainBgColor: #f3f3f3;
+  --secondaryBgColor: #fff;
+  --maintextColor: #4285f4;
+  --gradientColor: linear-gradient(to top right, #ccd3df, #4285f4);
+  --borderColor: #afafaf;
 }
 * {
   font-family: 'Poppins', sans-serif;
-  font-weight: 200;
+  font-weight: 500;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  color: var(--maintextColor);
 }
 body {
   background-color: var(--mainBgColor);
   height: 100vh;
   display: grid;
   place-items: center;
+}
+.btn-i {
+  background: var(--gradientColor);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.btn-i:hover {
+  transform: scale(1.1);
+}
+
+.primary-btn {
+  position: relative;
+  cursor: pointer;
+  background: var(--gradientColor);
+  color: var(--secondaryBgColor);
+  padding: 10px;
+}
+.primary-btn:hover {
+  transform: scale(1.1);
+}
+.primary-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: skewX(45deg) translateX(200px);
+  transition: 0.3s;
+  overflow: hidden;
+}
+.primary-btn:hover::before {
+  transform: skewX(45deg) translateX(-100px);
+}
+.secondary-btn {
+  border: none;
+  background: var(--secondaryBgColor);
+  cursor: pointer;
+  outline: none;
+}
+.controls {
+  display: flex;
+  justify-content: center;
+}
+/*************? METRONOME ******************/
+.metronome-container {
+  background-color: var(--secondaryBgColor);
+  border-radius: 25px;
+  padding: 2rem 0;
+  box-shadow: 0px 0px 11px 0px rgba(0, 0, 0, 0.66);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  overflow: hidden;
+}
+/*************? METRONOME LEFT ******************/
+.metronome-left {
+  border-right: 1px solid var(--borderColor);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  padding: 2rem;
+}
+.metronome-left > * {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.play-btn {
+  border-radius: 50%;
+  background: var(--gradientColor);
+}
+.play-btn i {
+  color: var(--mainBgColor);
+}
+
+/*************? BAR BUTTONS ******************/
+
+.bar-btns {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 10px;
+  width: 100%;
+}
+.bar-btn {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-gap: 5px;
+  cursor: pointer;
+}
+.level {
+  width: 3rem;
+  height: 1rem;
+  border-radius: 5px;
+  background: var(--secondaryBgColor);
+  box-shadow: 2px 2px 2px 0px rgb(0, 0, 0, 0.2),
+    inset 2px 2px 5px 0px rgb(0, 0, 0, 0.2);
+}
+
+/*************? METRONOME RIGHT ******************/
+.metronome-right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.metronome-right > * {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.bpm {
+  font-size: 3rem;
+  text-align: center;
+}
+.bpm-number {
+  font-weight: 600;
+}
+#bpm-number-input {
+  width: 25%;
+  margin: 0 1rem;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+}
+#timer-label {
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.save-btn {
+  border: none;
+  border-radius: 5px;
+  font-size: 1.25rem;
+}
+.current-time {
+  font-size: 1.25rem;
+  margin: 1rem;
 }

@@ -13,5 +13,70 @@
     <script defer src="js/main.js"></script>
     <title>Metronome App</title>
   </head>
-  <body></body>
+  <body>
+    <div class="metronome-container">
+      <div class="metronome-left">
+        <div class="play-btn primary-btn">
+          <i class="far fa-play-circle fa-9x"></i>
+        </div>
+        <div class="bar-btns">
+          <div class="bar-btn bar-1">
+            <span class="level level-1"></span>
+            <span class="level level-2"></span>
+            <span class="level level-3"></span>
+          </div>
+          <div class="bar-btn bar-2">
+            <span class="level level-1"></span>
+            <span class="level level-2"></span>
+            <span class="level level-3"></span>
+          </div>
+          <div class="bar-btn bar-3">
+            <span class="level level-1"></span>
+            <span class="level level-2"></span>
+            <span class="level level-3"></span>
+          </div>
+          <div class="bar-btn bar-4">
+            <span class="level level-1"></span>
+            <span class="level level-2"></span>
+            <span class="level level-3"></span>
+          </div>
+        </div>
+      </div>
+      <div class="metronome-right">
+        <div class="tempo">
+          <h1 class="bpm"><span class="bpm-number">120</span> BPM</h1>
+          <div class="controls">
+            <button class="secondary-btn btn-minus">
+              <i class="fas fa-minus-square fa-2x btn-i"></i>
+            </button>
+            <input
+              type="number"
+              name="bpm-number-input"
+              id="bpm-number-input"
+            />
+            <button class="secondary-btn btn-minus">
+              <i class="fas fa-plus-square fa-2x btn-i"></i>
+            </button>
+          </div>
+        </div>
+
+        <button class="save-btn primary-btn">Save Tempo</button>
+        <div class="timer-container">
+          <label for="timer" id="timer-label">
+            <input type="checkbox" name="timer" id="timer" value="timer" />
+            Stop metronome after</label
+          >
+          <div class="controls">
+            <button class="secondary-btn">
+              <i class="fas fa-minus-square fa-2x btn-i"></i>
+            </button>
+            <p class="current-time">01:00</p>
+            <button class="secondary-btn">
+              <i class="fas fa-plus-square fa-2x btn-i"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
