@@ -1,6 +1,5 @@
 'use strict';
-//? VARIABLES
-const playBtn = document.querySelector('.play-btn');
+
 //? SOUNDS
 const clap = document.getElementById('clap-sound');
 const hihat = document.getElementById('hi-hat-sound');
@@ -12,26 +11,49 @@ const snare = document.getElementById('snare-sound');
 const tom = document.getElementById('tom-sound');
 const tink = document.getElementById('tink-sound');
 
-let metronomeLoop = false;
-let playMetronome;
+metronome();
 
-//Play button
-playBtn.addEventListener('click', function () {
-  metronomeLoop = !metronomeLoop;
-  resetMetronome();
-  startStopBtn();
-  loopMetronome();
-});
-//Loops metronome
-function loopMetronome() {
-  playMetronome = setInterval(startStopBtn, 1000);
+////////////////////////////////////////////////
+//Metronome main function
+function metronome() {
+  //? VARIABLES
+  let metronomeLoop = false;
+  let playMetronome;
+  const playBtn = document.querySelector('.play-btn');
+
+  //Play button
+  playBtn.addEventListener('click', function () {
+    metronomeLoop = !metronomeLoop;
+    resetMetronome();
+    startStopBtn();
+    loopMetronome();
+  });
+  //Loops metronome
+  function loopMetronome() {
+    playMetronome = setInterval(startStopBtn, 1000);
+  }
+  //Starts/stops metronome
+  function startStopBtn() {
+    if (!metronomeLoop) return;
+    hihat.play();
+  }
+  //Clears time interval
+  function resetMetronome() {
+    clearInterval(playMetronome);
+  }
 }
-//Starts/stops metronome
-function startStopBtn() {
-  if (!metronomeLoop) return;
-  tink.play();
+
+////////////////////////////////////////////////
+//BPM counter
+const bpmInput = document.querySelector('#bpm-number-input');
+
+let bpm = 180;
+let beat;
+
+bpmInput.value = bpm;
+
+function beatCalc() {
+  beat = 60 / bpm;
+  console.log(beat);
 }
-//Clears time interval
-function resetMetronome() {
-  clearInterval(playMetronome);
-}
+beatCalc();

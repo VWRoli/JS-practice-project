@@ -45,16 +45,21 @@
       </div>
       <div class="metronome-right">
         <div class="tempo">
-          <h1 class="bpm"><span class="bpm-number">120</span> BPM</h1>
           <div class="controls">
             <button class="secondary-btn btn-minus">
               <i class="fas fa-minus-square fa-2x btn-i"></i>
             </button>
-            <input
-              type="number"
-              name="bpm-number-input"
-              id="bpm-number-input"
-            />
+            <div class="bpm">
+              <input
+                type="number"
+                name="bpm-number-input"
+                id="bpm-number-input"
+                min="30"
+                max="220"
+              />
+              BPM
+            </div>
+
             <button class="secondary-btn btn-minus">
               <i class="fas fa-plus-square fa-2x btn-i"></i>
             </button>
