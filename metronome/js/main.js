@@ -10,50 +10,40 @@ const ride = document.getElementById('ride-sound');
 const snare = document.getElementById('snare-sound');
 const tom = document.getElementById('tom-sound');
 const tink = document.getElementById('tink-sound');
+//? VARIABLES
+const playBtn = document.querySelector('.play-btn');
 
-metronome();
+//metronome();
 
 ////////////////////////////////////////////////
-//Metronome main function
-function metronome() {
-  //? VARIABLES
-  let metronomeLoop = false;
-  let playMetronome;
-  const playBtn = document.querySelector('.play-btn');
-
+class Metronome {
+  constructor() {
+    this.metronomeLoop = false;
+    this.playMetronome;
+    playBtn.addEventListener('click', this.play.bind(this));
+  }
   //Play button
-  playBtn.addEventListener('click', function () {
-    metronomeLoop = !metronomeLoop;
-    resetMetronome();
-    startStopBtn();
-    loopMetronome();
-  });
+  play() {
+    this.metronomeLoop = !this.metronomeLoop;
+    this.resetMetronome();
+    if (this.metronomeLoop === false) return;
+    this.startMetronome();
+    this.loopMetronome();
+  }
+
   //Loops metronome
-  function loopMetronome() {
-    playMetronome = setInterval(startStopBtn, 1000);
+  loopMetronome() {
+    this.playMetronome = setInterval(this.startMetronome, 1000);
   }
   //Starts/stops metronome
-  function startStopBtn() {
-    if (!metronomeLoop) return;
+  startMetronome() {
     hihat.play();
   }
   //Clears time interval
-  function resetMetronome() {
-    clearInterval(playMetronome);
+  resetMetronome() {
+    clearInterval(this.playMetronome);
   }
 }
+const metronome = new Metronome();
 
 ////////////////////////////////////////////////
-//BPM counter
-const bpmInput = document.querySelector('#bpm-number-input');
-
-let bpm = 180;
-let beat;
-
-bpmInput.value = bpm;
-
-function beatCalc() {
-  beat = 60 / bpm;
-  console.log(beat);
-}
-beatCalc();
