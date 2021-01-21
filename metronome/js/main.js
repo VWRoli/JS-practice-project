@@ -1,5 +1,4 @@
 'use strict';
-
 //? SOUNDS
 const clap = document.getElementById('clap-sound');
 const hihat = document.getElementById('hi-hat-sound');
@@ -12,20 +11,40 @@ const tom = document.getElementById('tom-sound');
 const tink = document.getElementById('tink-sound');
 //? VARIABLES
 const playBtn = document.querySelector('.play-btn');
-
-//metronome();
+const bpmForm = document.querySelector('.bpm');
+const bpmInput = document.querySelector('#bpm-number-input');
 
 ////////////////////////////////////////////////
 class Metronome {
   constructor() {
     this.metronomeLoop = false;
     this.playMetronome;
+    this.bpm;
+    this.beat;
+
     playBtn.addEventListener('click', this.play.bind(this));
+    bpmForm.addEventListener('submit', this.getBpm);
   }
+  //Set default BPM
+  _defaultBPM() {
+    //bpmInput.value = 120;
+  }
+  //Get user input BPM
+  getBpm(e) {
+    e.preventDefault();
+    //this.bpm = bpmInput.value;
+  }
+
   //Play button
   play() {
+    const changePlayBtn = () =>
+      !this.metronomeLoop
+        ? (playBtn.innerHTML = `<i class="far fa-play-circle fa-9x"></i>`)
+        : (playBtn.innerHTML = `<i class="far fa-pause-circle fa-9x"></i>`);
+
     this.metronomeLoop = !this.metronomeLoop;
     this.resetMetronome();
+    changePlayBtn();
     if (this.metronomeLoop === false) return;
     this.startMetronome();
     this.loopMetronome();
@@ -33,9 +52,9 @@ class Metronome {
 
   //Loops metronome
   loopMetronome() {
-    this.playMetronome = setInterval(this.startMetronome, 1000);
+    this.playMetronome = setInterval(this.startMetronome, 500);
   }
-  //Starts/stops metronome
+  //Starts metronome
   startMetronome() {
     hihat.play();
   }
@@ -45,5 +64,3 @@ class Metronome {
   }
 }
 const metronome = new Metronome();
-
-////////////////////////////////////////////////
