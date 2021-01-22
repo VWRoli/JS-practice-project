@@ -13,8 +13,9 @@ const allStrings = {
 const strings = document.querySelectorAll('.strings');
 const noteEl = document.querySelector('.note');
 const scoreLabel = document.querySelector('.score');
+const buttonsAll = document.querySelector('.buttons-wrapper');
 
-let randomNote, clickedNote, newNoteEl;
+let randomNote, clickedNote, newNoteEl, win;
 let score = 0;
 
 scoreLabel.textContent = score;
@@ -70,8 +71,6 @@ function createRandomNote() {
 createRandomNote();
 
 //? BUTTONS
-const buttonsAll = document.querySelector('.buttons-wrapper');
-
 buttonsAll.addEventListener('click', function (e) {
   if (!e.target.dataset.note) return;
   clickedNote = e.target.dataset.note;
@@ -81,10 +80,19 @@ buttonsAll.addEventListener('click', function (e) {
 
 //? COMPARE NOTES
 function noteComparison(note1, note2) {
-  let win = note1 === note2 ? true : false;
+  win = note1 === note2 ? true : false;
   //show note
   newNoteEl.textContent = note1;
   newNoteEl.style.background = win ? `var(--successColor)` : `var(--failColor)`;
+  handleScores();
+  //Next round //todo
+  noteEl.remove();
+  createRandomNote();
+}
+
+function handleScores() {
   win ? score++ : score;
   scoreLabel.textContent = score;
+  if (score >= 1) console.log('game Complete'); //todo
 }
+function removeNote() {} //todo NO 1 have to remove the element
