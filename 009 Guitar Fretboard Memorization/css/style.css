@@ -71,7 +71,7 @@ body {
 .new-game:hover::before {
   transform: skewX(45deg) translateX(-75px);
 }
-/*? STRINGS */
+/*? FRETS */
 .frets {
   position: absolute;
   width: 1200px;
@@ -90,8 +90,9 @@ body {
   border-left: 3px solid var(--fretColor);
   border-right: 3px solid var(--fretColor);
 }
+/*? STRINGS */
 .open-strings,
-.string-container {
+.fretboard-container {
   position: relative;
   height: 12rem;
   display: grid;
@@ -135,7 +136,7 @@ body {
 .note {
   position: absolute;
   top: -25px;
-  left: 1125px;
+  left: 25px;
   height: 50px;
   width: 50px;
   border-radius: 50%;
