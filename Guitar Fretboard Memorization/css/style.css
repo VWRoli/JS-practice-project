@@ -214,24 +214,20 @@ body {
   width: 1rem;
   border-radius: 50%;
   background: var(--stringColor);
+  top: 25px;
 }
 .dot-3 {
-  top: 25px;
   left: 235px;
 }
 .dot-5 {
-  top: 25px;
   left: 435px;
 }
 .dot-7 {
-  top: 25px;
   left: 635px;
 }
 .dot-9 {
-  top: 25px;
   left: 835px;
 }
 .dot-12 {
-  top: 25px;
   left: 1135px;
 }
