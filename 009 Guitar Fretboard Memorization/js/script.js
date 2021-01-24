@@ -14,9 +14,13 @@ const strings = document.querySelectorAll('.strings');
 const noteEl = document.querySelector('.note');
 const scoreLabel = document.querySelector('.score');
 const buttonsAll = document.querySelector('.buttons-wrapper');
+const messageBox = document.querySelector('.message-box');
+const finalScoreLabel = document.querySelector('.final-score');
+const newGameBtn = document.querySelector('.new-game');
 
-let randomNote, clickedNote, newNoteEl, win;
+let randomNote, clickedNote, newNoteEl, win, nextRound;
 let score = 0;
+let guess = 10;
 
 scoreLabel.textContent = score;
 
@@ -44,12 +48,11 @@ function createRandomNote() {
   };
   const randomNoteObj = getRandomNote();
   randomNote = randomNoteObj.noteName;
-  console.log(randomNote);
 
   //CREATE NOTE ELEMENT
   const createNoteEl = () => {
     newNoteEl = document.createElement('div');
-    newNoteEl.className = 'note';
+    newNoteEl.id = 'note';
     newNoteEl.textContent = '?';
     //Sets position on freteboard
     newNoteEl.style.left = `${randomNoteObj.noteIndex * 100 + 25}px`;
@@ -65,7 +68,6 @@ function createRandomNote() {
     );
     createNoteEl();
   };
-
   showRandomNote(randomString);
 }
 createRandomNote();
@@ -74,8 +76,9 @@ createRandomNote();
 buttonsAll.addEventListener('click', function (e) {
   if (!e.target.dataset.note) return;
   clickedNote = e.target.dataset.note;
-  console.log(clickedNote);
   noteComparison(randomNote, clickedNote);
+  guess--;
+  buttonsAll.style.pointerEvents = 'none';
 });
 
 //? COMPARE NOTES
@@ -83,16 +86,43 @@ function noteComparison(note1, note2) {
   win = note1 === note2 ? true : false;
   //show note
   newNoteEl.textContent = note1;
-  newNoteEl.style.background = win ? `var(--successColor)` : `var(--failColor)`;
-  handleScores();
-  //Next round //todo
-  noteEl.remove();
-  createRandomNote();
-}
+  win ? newNoteEl.classList.add('success') : newNoteEl.classList.add('fail');
 
-function handleScores() {
+  //Handle scores and win
   win ? score++ : score;
   scoreLabel.textContent = score;
-  if (score >= 1) console.log('game Complete'); //todo
+
+  if (guess > 1) {
+    //Next round
+    nextRound = setTimeout(function () {
+      removeNote();
+      createRandomNote();
+      buttonsAll.style.pointerEvents = 'auto';
+    }, 1000);
+  } else {
+    //Game completed!
+    finalScoreLabel.textContent = score;
+    messageBox.style.top = '10%';
+    buttonsAll.style.pointerEvents = 'none';
+  }
 }
-function removeNote() {} //todo NO 1 have to remove the element
+
+function removeNote() {
+  if (
+    newNoteEl.classList.contains('fail') ||
+    newNoteEl.classList.contains('success')
+  ) {
+    newNoteEl.parentNode.removeChild(newNoteEl);
+  }
+}
+
+//New game button
+newGameBtn.addEventListener('click', function () {
+  messageBox.style.top = '-5%';
+  guess = 10;
+  score = 0;
+  scoreLabel.textContent = score;
+  newNoteEl.parentNode.removeChild(newNoteEl);
+  createRandomNote();
+  buttonsAll.style.pointerEvents = 'auto';
+});
