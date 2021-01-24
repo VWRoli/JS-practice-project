@@ -118,7 +118,7 @@ function removeNote() {
 
 //New game button
 newGameBtn.addEventListener('click', function () {
-  messageBox.style.top = '-5%';
+  messageBox.style.top = '-50%';
   guess = 10;
   score = 0;
   scoreLabel.textContent = score;
