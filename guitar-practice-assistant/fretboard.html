@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/fretboard.css" />
+    <script defer src="./js/fretboard.js"></script>
+    <title>Guitar Fretboard Memorization</title>
+  </head>
+  <body>
+    <!--? GAME MESSAGE -->
+    <div class="message-box">
+      Game Completed! <br />
+      Your scores are: <span class="final-score">0</span>/10
+    </div>
+
+    <!--? GAME STATS -->
+    <div class="game-stats">
+      <label class="label-score">Score: <span class="score"></span>/10</label>
+      <h1 id="title">Guitar Fretboard Memorization</h1>
+      <button class="new-game">New Game</button>
+    </div>
+    <!--? FRETBOARD -->
+    <div class="fretboard">
+      <div class="open-strings">
+        <span>E</span>
+        <span>B</span>
+        <span>G</span>
+        <span>D</span>
+        <span>A</span>
+        <span>E</span>
+      </div>
+      <div class="fretboard-container">
+        <!--? FRETS -->
+        <div class="frets">
+          <div class="fret fret-1"></div>
+          <div class="fret fret-2"></div>
+          <div class="fret fret-3"></div>
+          <div class="fret fret-4"></div>
+          <div class="fret fret-5"></div>
+          <div class="fret fret-6"></div>
+          <div class="fret fret-7"></div>
+          <div class="fret fret-8"></div>
+          <div class="fret fret-9"></div>
+          <div class="fret fret-10"></div>
+          <div class="fret fret-11"></div>
+          <div class="fret fret-12"></div>
+        </div>
+        <!--? STRINGS -->
+        <div class="strings higheString">
+          <hr class="high-e-string string-item" />
+        </div>
+        <div class="strings bString">
+          <hr class="b-string string-item" />
+        </div>
+        <div class="strings gString">
+          <hr class="g-string string-item" />
+        </div>
+        <div class="strings dString">
+          <hr class="d-string string-item" />
+        </div>
+        <div class="strings aString">
+          <hr class="a-string string-item" />
+        </div>
+        <div class="strings loweString">
+          <div class="dots">
+            <div class="dot dot-3"></div>
+            <div class="dot dot-5"></div>
+            <div class="dot dot-7"></div>
+            <div class="dot dot-9"></div>
+            <div class="dot dot-12"></div>
+          </div>
+          <hr class="low-e-string string-item" />
+        </div>
+      </div>
+    </div>
+    <!--? BUTTONS -->
+    <div class="buttons-wrapper">
+      <button class="btn btn-a" data-note="A">A</button>
+      <button class="btn btn-a-sharp" data-note="A#">A#</button>
+      <button class="btn btn-b" data-note="B">B</button>
+      <button class="btn btn-c" data-note="C">C</button>
+      <button class="btn btn-c-sharp" data-note="C#">C#</button>
+      <button class="btn btn-d" data-note="D">D</button>
+      <button class="btn btn-d-sharp" data-note="D#">D#</button>
+      <button class="btn btn-e" data-note="E">E</button>
+      <button class="btn btn-f" data-note="F">F</button>
+      <button class="btn btn-f-sharp" data-note="F#">F#</button>
+      <button class="btn btn-g" data-note="G">G</button>
+      <button class="btn btn-g-sharp" data-note="G#">G#</button>
+    </div>
+  </body>
+</html>
