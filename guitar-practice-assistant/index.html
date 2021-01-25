@@ -3,7 +3,104 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.15.1/css/all.css"
+      integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./css/style.css" />
+    <script defer src="./js/main.js"></script>
     <title>Guitar Practice Assistance</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <!--? PRACTICE ASSISTANT SECTION -->
+      <section class="practice-assistant">
+        <h1 class="logo"><i class="fas fa-guitar"></i> Practice Assistant</h1>
+        <ul id="practice-items">
+          <!--? INPUT FORM SECTION -->
+          <form class="practice-item new-practice-item">
+            <div class="title-group">
+              <label for="title" id="title-label">Title</label>
+              <input
+                type="text"
+                name="title"
+                id="title-input"
+                placeholder="Song, excercise, chord..."
+                required
+              />
+            </div>
+
+            <div class="duration-group">
+              <label for="duration" id="duration-label">Duration</label>
+              <input
+                type="number"
+                name="duration"
+                id="duration-input"
+                placeholder="Min"
+                min="0"
+                max="99"
+              />
+            </div>
+
+            <div class="type-group">
+              <label for="type" id="type-label">Type</label>
+              <select class="form-input-type">
+                <option value="excercise">Excercise</option>
+                <option value="song">Song</option>
+              </select>
+            </div>
+
+            <div class="btn-group">
+              <button type="submit" id="add-new-item" class="dark-btn">
+                Add
+              </button>
+            </div>
+          </form>
+          <!--? PRACTICE ITEM SECTION -->
+          <li class="practice-item list-practice-item excercise-item">
+            <h2 class="practice-item-title">F Chord</h2>
+            <div class="practice-item-details">
+              <span class="practice-item-type"
+                >Type:
+                <i class="fas fa-dumbbell"></i>
+              </span>
+              <span class="practice-item-time"
+                >Time: <span class="practice-item-time-value"></span>05:00
+                <i class="far fa-clock"></i
+              ></span>
+            </div>
+            <div class="play-btn-wrapper">
+              <button class="play-btn">
+                <i class="far fa-play-circle fa-2x"></i
+                ><!-- <i class="far fa-pause-circle"></i> -->
+              </button>
+            </div>
+          </li>
+
+          <li class="practice-item list-practice-item song-item">
+            <h2 class="practice-item-title">Nirvana - Breed</h2>
+            <div class="practice-item-details">
+              <span class="practice-item-type"
+                >Type: <i class="fas fa-music"></i>
+              </span>
+              <span class="practice-item-time"
+                >Time: <span class="practice-item-time-value"></span>05:00
+                <i class="far fa-clock"></i
+              ></span>
+            </div>
+            <div class="play-btn-wrapper">
+              <button class="play-btn">
+                <i class="far fa-play-circle fa-2x"></i
+                ><!-- <i class="far fa-pause-circle"></i> -->
+              </button>
+            </div>
+          </li>
+        </ul>
+      </section>
+      <!--? CONTENT SECTION -->
+      <div class="content"></div>
+    </div>
+  </body>
 </html>

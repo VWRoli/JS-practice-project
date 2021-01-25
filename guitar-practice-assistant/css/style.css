@@ -1,7 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+:root {
+  --darkColor1: #2d3439;
+  --darkColor2: #42484d;
+  --lightColor1: #aaa;
+  --lightColor2: #ececec;
+  --blueGradient: linear-gradient(to top right, #164eaf, #4285f4);
+  --yellowGradient: linear-gradient(to top left, #ffb003, #ffcb03);
+  --songBorder: #39b385;
+  --excerciseBorder: #e52a5a;
+
+  --guessNote: linear-gradient(to top left, #7e7e7e, #a0a0a0);
+  --failColor: linear-gradient(to top left, #e52a5a, #ff585f);
+  --greenGradient: linear-gradient(to top left, #39b385, #9be15d);
+}
+/*************? GLOBAL ******************/
 * {
   font-family: 'Lato', sans-serif;
-  font-size: 22px;
+  font-size: 16px;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+body {
+  background-color: var(--lightColor2);
+  color: var(--darkColor1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.dark-btn {
+  border: none;
+  border-radius: 5px;
+  background: var(--lightColor1);
+  color: var(--lightColor2);
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 5px;
+  cursor: pointer;
+  outline: none;
+}
+.play-btn:hover,
+.dark-btn:hover {
+  transform: scale(1.1);
+}
+input,
+select {
+  border-radius: 5px;
+  border: none;
+  padding: 5px;
+  outline: none;
+  margin-left: 3px;
+}
+.practice-item {
+  background: var(--darkColor2);
+  border-radius: 5px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.fa-dumbbell {
+  background: var(--blueGradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.fa-music {
+  background: var(--yellowGradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/*************? PRACTICE ASSISTANT SECTION ******************/
+#practice-items {
+  list-style: none;
+}
+.practice-assistant {
+  background: var(--darkColor1);
+  color: var(--lightColor2);
+  padding: 2rem;
+  font-size: 0.5rem;
+  border-radius: 25px 0 0 25px;
+  min-height: 80vh;
+}
+.logo {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+.logo i {
+  background: var(--blueGradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 2rem;
+}
+.title-group {
+  grid-column: span 3;
+  margin-bottom: 1rem;
+}
+.title-group input {
+  width: 90%;
+}
+.btn-group {
+  justify-self: end;
+}
+.practice-item-title {
+  grid-column: span 3;
+}
+.practice-item-details {
+  grid-column: span 2;
+}
+.play-btn-wrapper {
+  justify-self: end;
+}
+.play-btn {
+  background: var(--darkColor2);
+  color: var(--lightColor2);
+  border: none;
+  cursor: pointer;
+}
+.practice-item-details {
+  align-self: flex-end;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.song-item {
+  border-left: 5px solid var(--songBorder);
+}
+.excercise-item {
+  border-left: 5px solid var(--excerciseBorder);
 }
