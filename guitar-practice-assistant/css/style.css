@@ -8,7 +8,7 @@
   --blueColor: #4285f4;
   --blueGradient: linear-gradient(to top right, #164eaf, #4285f4);
   --yellowGradient: linear-gradient(to top left, #ffb003, #ffcb03);
-  --songBorder: #39b385;
+  --songBorder: #8a3fcf;
   --excerciseBorder: #e52a5a;
   --greenGradient: linear-gradient(to top left, #39b385, #9be15d);
 
@@ -88,6 +88,10 @@ select {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+small {
+  color: #ec6d8d;
+  padding-left: 2.2rem;
+}
 /*************? PRACTICE ASSISTANT SECTION ******************/
 #practice-items {
   list-style: none;
@@ -147,6 +151,10 @@ select {
 }
 .excercise-item {
   border-left: 5px solid var(--excerciseBorder);
+}
+
+.input-error {
+  background: #ec6d8d;
 }
 /*************? CONTENT SECTION ******************/
 .content {

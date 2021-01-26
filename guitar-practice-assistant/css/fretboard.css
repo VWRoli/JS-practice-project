@@ -235,4 +235,11 @@ body {
 /*? BACK BUTTON */
 .back-btn {
   position: absolute;
+  top: 2rem;
+  left: 2rem;
+  border: none;
+  background-color: #7e7e7e;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
