@@ -20,7 +20,7 @@ class Song extends PracticeItem {
   }
 }
 //? CREATE EXCERCISE
-class excercise extends PracticeItem {
+class Excercise extends PracticeItem {
   type = 'excercise';
   constructor(title, duration) {
     super(title, duration);
@@ -34,10 +34,17 @@ class App {
     btnNew.addEventListener('click', this._newPracticeItem.bind(this));
     form.addEventListener('submit', this._newPracticeItem.bind(this));
   }
+
+  //Clear input fields and hide form
+  _hideForm() {
+    inputTitle.value = inputDuration.value = '';
+  }
   //Add new prctice items
   _newPracticeItem(e) {
-    const validTitle = (title) => title === '';
-    const validDuration = (duration) => duration <= 0 || duration >= 100;
+    const inValidTitle = (title) => title === '';
+    const inValidDuration = (duration) => duration <= 0 || duration >= 100;
+    let validInput = false;
+    let practiceItem;
 
     e.preventDefault();
     //Get data from form
@@ -52,24 +59,39 @@ class App {
       const small = input.nextElementSibling;
       small.textContent = msg;
     };
+    const setSuccess = (input) => {
+      input.style.background = '#fff';
+      input.nextElementSibling.textContent = '';
+    };
 
     //Check if user inputs are valid
     const checkInputs = () => {
-      if (validTitle(title)) {
+      if (inValidTitle(title)) {
         setErrorFor(inputTitle, `Title cannot be blank`);
       }
-      if (validDuration(duration)) {
+      if (inValidDuration(duration)) {
         setErrorFor(inputDuration, `Between 1-99`);
       }
+      if (!inValidTitle(title) && !inValidDuration(duration)) {
+        setSuccess(inputTitle);
+        setSuccess(inputDuration);
+        return (validInput = true);
+      }
     };
-    checkInputs();
-    if (type === 'song' && validTitle(title) && validDuration(duration)) {
-      console.log(title, duration, type);
+
+    //
+    if (type === 'song' && checkInputs()) {
+      practiceItem = new Song(title, duration);
+
+      console.log(practiceItem);
     }
-    if (type === 'excercise' && validTitle(title) && validDuration(duration)) {
-      console.log(title, duration, type);
+    if (type === 'excercise' && checkInputs()) {
+      practiceItem = new Excercise(title, duration);
+
+      console.log(practiceItem);
     }
+
+    this._hideForm();
   }
 }
-
 const app = new App();
