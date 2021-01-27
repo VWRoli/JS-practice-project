@@ -15,6 +15,7 @@
     <title>Guitar Practice Assistance</title>
   </head>
   <body>
+    <div class="message-box">Message</div>
     <main class="container">
       <!--? PRACTICE ASSISTANT SECTION -->
       <section class="practice-assistant">
@@ -22,84 +23,51 @@
         <ul id="practice-items">
           <!--? INPUT FORM SECTION -->
           <form class="practice-item new-practice-item">
-            <div class="title-group">
-              <label for="title" id="title-label">Title</label>
-              <input
-                type="text"
-                name="title"
-                id="title-input"
-                placeholder="Song, excercise, chord..."
-                required
-              />
-              <small></small>
+            <div class="form-group form-group-hidden">
+              <div class="title-group">
+                <label for="title" id="title-label">Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  id="title-input"
+                  placeholder="Song, excercise, chord..."
+                  required
+                />
+              </div>
+
+              <div class="duration-group">
+                <label for="duration" id="duration-label">Duration</label>
+                <input
+                  type="number"
+                  name="duration"
+                  id="duration-input"
+                  placeholder="Min"
+                  min="0"
+                  max="99"
+                />
+              </div>
+
+              <div class="type-group">
+                <label for="type" id="type-label">Type</label>
+                <select class="form-input-type">
+                  <option value="excercise">Excercise</option>
+                  <option value="song">Song</option>
+                </select>
+              </div>
+
+              <div class="btn-group">
+                <button type="submit" id="add-new-item" class="dark-btn">
+                  Add
+                </button>
+              </div>
             </div>
 
-            <div class="duration-group">
-              <label for="duration" id="duration-label">Duration</label>
-              <input
-                type="number"
-                name="duration"
-                id="duration-input"
-                placeholder="Min"
-                min="0"
-                max="99"
-              />
-              <small></small>
-            </div>
-
-            <div class="type-group">
-              <label for="type" id="type-label">Type</label>
-              <select class="form-input-type">
-                <option value="excercise">Excercise</option>
-                <option value="song">Song</option>
-              </select>
-            </div>
-
-            <div class="btn-group">
-              <button type="submit" id="add-new-item" class="dark-btn">
-                Add
-              </button>
+            <div class="slide-btn">
+              <span>
+                <i class="fas fa-chevron-down"></i>
+              </span>
             </div>
           </form>
-          <!--? PRACTICE ITEM SECTION -->
-          <li class="practice-item list-practice-item excercise-item">
-            <h2 class="practice-item-title">F Chord</h2>
-            <div class="practice-item-details">
-              <span class="practice-item-type"
-                >Type:
-                <i class="fas fa-dumbbell"></i>
-              </span>
-              <span class="practice-item-time"
-                >Time: <span class="practice-item-time-value"></span>05:00
-                <i class="far fa-clock"></i
-              ></span>
-            </div>
-            <div class="play-btn-wrapper">
-              <button class="play-btn">
-                <i class="far fa-play-circle fa-2x"></i
-                ><!-- <i class="far fa-pause-circle"></i> -->
-              </button>
-            </div>
-          </li>
-
-          <li class="practice-item list-practice-item song-item">
-            <h2 class="practice-item-title">Nirvana - Breed</h2>
-            <div class="practice-item-details">
-              <span class="practice-item-type"
-                >Type: <i class="fas fa-music"></i>
-              </span>
-              <span class="practice-item-time"
-                >Time: <span class="practice-item-time-value"></span>05:00
-                <i class="far fa-clock"></i
-              ></span>
-            </div>
-            <div class="play-btn-wrapper">
-              <button class="play-btn">
-                <i class="far fa-play-circle fa-2x"></i
-                ><!-- <i class="far fa-pause-circle"></i> -->
-              </button>
-            </div>
-          </li>
         </ul>
       </section>
       <!--? CONTENT SECTION -->
