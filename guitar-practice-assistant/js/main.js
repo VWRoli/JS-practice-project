@@ -35,20 +35,21 @@ class Excercise extends PracticeItem {
 
 //? APP ARCHITECTURE
 class App {
+  _practiceItems = [];
+
   constructor() {
+    //Get data from localStorage
+    this._getLocalStorage();
     //Event handlers
     btnNew.addEventListener('click', this._newPracticeItem.bind(this));
-    btnSlide.addEventListener('click', this._showForm.bind(this));
+    btnSlide.addEventListener('click', this._showHideForm.bind(this));
     form.addEventListener('submit', this._newPracticeItem.bind(this));
   }
-  _showForm() {
+  //Toggle form
+  _showHideForm() {
     formGroup.classList.toggle('form-group-hidden');
   }
-  //Clear input fields and hide form
-  _hideForm() {
-    inputTitle.value = inputDuration.value = '';
-    formGroup.classList.add('form-group-hidden');
-  }
+
   //Add new prctice items
   _newPracticeItem(e) {
     const inValidTitle = (title) => title === '';
@@ -78,11 +79,9 @@ class App {
     const checkInputs = () => {
       if (inValidTitle(title)) {
         setErrorFor(inputTitle);
-        //this._messageHandler('1');
       }
       if (inValidDuration(duration)) {
         setErrorFor(inputDuration);
-        //this._messageHandler('', '2');
       }
       if (!inValidTitle(title) && !inValidDuration(duration)) {
         setSuccess(inputTitle);
@@ -102,9 +101,16 @@ class App {
     }
     //Add practice item to list
     if (practiceItem === undefined) return;
+    //Clear input fields
+    inputTitle.value = inputDuration.value = '';
+
+    //add new object to array
+    this._practiceItems.push(practiceItem);
+    //Add practice item to UI
     this._addPracticeItem(practiceItem);
-    //Hide and clear form
-    this._hideForm();
+
+    //Set local storage
+    this._setLocalStorage();
   }
   _addPracticeItem({ title, duration, type }) {
     let html = `<li class="practice-item list-practice-item ${type}-item">
@@ -137,6 +143,18 @@ class App {
     setTimeout(() => {
       messageBox.style.top = '-50%';
     }, 2000);
+  }
+  _setLocalStorage() {
+    localStorage.setItem('practiceItems', JSON.stringify(this._practiceItems));
+  }
+  _getLocalStorage() {
+    const data = JSON.parse(localStorage.getItem('practiceItems'));
+
+    if (!data) return;
+
+    this._practiceItems = data;
+
+    this._practiceItems.forEach((item) => this._addPracticeItem(item));
   }
 }
 const app = new App();
