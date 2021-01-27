@@ -6,13 +6,17 @@ const inputType = document.querySelector('.form-input-type');
 
 const btnNew = document.querySelector('#add-new-item');
 const btnSlide = document.querySelector('.slide-btn');
+const btnCloseItem = document.querySelector('.close-item');
 
 const form = document.querySelector('.new-practice-item');
 const formGroup = document.querySelector('.form-group');
+const allPracticeItems = document.querySelector('#practice-items');
 
 const messageBox = document.querySelector('.message-box');
 
 class PracticeItem {
+  id = (Date.now() + '').slice(-10);
+
   constructor(title, duration) {
     this.title = title;
     this.duration = duration;
@@ -40,10 +44,12 @@ class App {
   constructor() {
     //Get data from localStorage
     this._getLocalStorage();
+
     //Event handlers
     btnNew.addEventListener('click', this._newPracticeItem.bind(this));
     btnSlide.addEventListener('click', this._showHideForm.bind(this));
     form.addEventListener('submit', this._newPracticeItem.bind(this));
+    allPracticeItems.addEventListener('click', this._deleteItem.bind(this));
   }
   //Toggle form
   _showHideForm() {
@@ -93,8 +99,6 @@ class App {
     //
     if (type === 'song' && checkInputs()) {
       practiceItem = new Song(title, duration);
-
-      console.log(practiceItem);
     }
     if (type === 'excercise' && checkInputs()) {
       practiceItem = new Excercise(title, duration);
@@ -106,14 +110,16 @@ class App {
 
     //add new object to array
     this._practiceItems.push(practiceItem);
+
     //Add practice item to UI
     this._addPracticeItem(practiceItem);
-
+    console.log(practiceItem);
     //Set local storage
     this._setLocalStorage();
   }
-  _addPracticeItem({ title, duration, type }) {
+  _addPracticeItem({ title, duration, type, id }) {
     let html = `<li class="practice-item list-practice-item ${type}-item">
+    <span class="close-item"><i class="fas fa-times" id="${id}"></i></span>
     <h2 class="practice-item-title">${title}</h2>
     <div class="practice-item-details">
       <span class="practice-item-type"
@@ -136,6 +142,22 @@ class App {
     </div>
   </li>`;
     form.insertAdjacentHTML('afterend', html);
+  }
+  _deleteItem(e) {
+    //find item
+    const targetId = e.target.id;
+    if (!targetId) return;
+    const removeIndex = this._practiceItems
+      .map((item) => item.id)
+      .indexOf(targetId);
+    //remove from array
+    removeIndex >= 0 && this._practiceItems.splice(removeIndex, 1);
+    //Remove from UI
+    const targetListElement = e.target.closest('.list-practice-item');
+    if (targetListElement === null) return;
+    targetListElement.remove();
+    //Remove from localstorage
+    this._setLocalStorage();
   }
   _messageHandler(...msg) {
     messageBox.style.top = '10%';

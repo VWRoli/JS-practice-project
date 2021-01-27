@@ -107,12 +107,12 @@ select {
   height: 0;
   visibility: hidden;
   opacity: 0;
-  /* transition: 0.3s; */
 }
 
 .list-practice-item {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  position: relative;
 }
 .practice-assistant {
   /*  width: 45%; */
@@ -184,7 +184,14 @@ select {
 .excercise-item {
   border-left: 5px solid var(--excerciseBorder);
 }
-
+.close-item {
+  text-align: right;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  color: #e52a5a;
+  cursor: pointer;
+}
 .input-error {
   background: #ec6d8d;
 }
