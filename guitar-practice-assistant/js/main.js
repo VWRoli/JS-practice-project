@@ -19,7 +19,7 @@ class PracticeItem {
 
   constructor(title, duration) {
     this.title = title;
-    this.duration = duration;
+    this.duration = duration * 60; //In seconds
   }
 }
 //? CREATE SONG
@@ -49,7 +49,7 @@ class App {
     btnNew.addEventListener('click', this._newPracticeItem.bind(this));
     btnSlide.addEventListener('click', this._showHideForm.bind(this));
     form.addEventListener('submit', this._newPracticeItem.bind(this));
-    allPracticeItems.addEventListener('click', this._deleteItem.bind(this));
+    allPracticeItems.addEventListener('click', this._clickHandler.bind(this));
   }
   //Toggle form
   _showHideForm() {
@@ -118,8 +118,12 @@ class App {
     this._setLocalStorage();
   }
   _addPracticeItem({ title, duration, type, id }) {
-    let html = `<li class="practice-item list-practice-item ${type}-item">
-    <span class="close-item"><i class="fas fa-times" id="${id}"></i></span>
+    //converting duration to minutes and second
+    const min = String(Math.trunc(duration / 60)).padStart(2, 0);
+    const sec = String(duration % 60).padStart(2, 0);
+
+    let html = `<li class="practice-item list-practice-item ${type}-item" id="${id}">
+    <span class="close-item"><i class="fas fa-times" ></i></span>
     <h2 class="practice-item-title">${title}</h2>
     <div class="practice-item-details">
       <span class="practice-item-type"
@@ -131,7 +135,7 @@ class App {
         
       </span>
       <span class="practice-item-time"
-        >Time: <span class="practice-item-time-value"></span>${duration}
+        >Time: <span class="practice-item-time-value">${min}:${sec}</span>
         <i class="far fa-clock"></i
       ></span>
     </div>
@@ -143,21 +147,63 @@ class App {
   </li>`;
     form.insertAdjacentHTML('afterend', html);
   }
-  _deleteItem(e) {
-    //find item
-    const targetId = e.target.id;
-    if (!targetId) return;
-    const removeIndex = this._practiceItems
-      .map((item) => item.id)
-      .indexOf(targetId);
-    //remove from array
-    removeIndex >= 0 && this._practiceItems.splice(removeIndex, 1);
-    //Remove from UI
+  _clickHandler(e) {
+    //Select list practice item
     const targetListElement = e.target.closest('.list-practice-item');
     if (targetListElement === null) return;
-    targetListElement.remove();
+    const durationTarget = targetListElement.querySelector(
+      '.practice-item-time-value'
+    );
+    //Find ID number
+    const itemId = targetListElement.id;
+    //Find ID index in the array
+    const itemIndex = this._practiceItems
+      .map((item) => item.id)
+      .indexOf(itemId);
+
+    //Close button clicked
+    if (e.target.classList.contains('fa-times')) {
+      this._deleteItem(targetListElement, itemIndex);
+    }
+    //Start button clicked
+    if (e.target.classList.contains('fa-play-circle')) {
+      this._countDown(durationTarget, itemIndex, targetListElement);
+    }
+  }
+
+  _deleteItem(targetItem, i) {
+    //remove from array
+    i >= 0 && this._practiceItems.splice(i, 1);
+    //Remove from UI
+    console.log(targetItem);
+    targetItem.remove();
     //Remove from localstorage
     this._setLocalStorage();
+  }
+  _countDown(target, i, targetItem) {
+    let itemDuration = this._practiceItems[i].duration;
+    const tick = function () {
+      //converting duration to minutes and second
+      const min = String(Math.trunc(itemDuration / 60)).padStart(2, 0);
+      const sec = String(itemDuration % 60).padStart(2, 0);
+
+      //Display remaining time on screen
+      target.textContent = `${min}:${sec}`;
+      target.style.color = `#ffcb03`;
+      //When 0 sec, stop timer and log out user
+      if (itemDuration === 0) {
+        clearInterval(timer);
+        // Disable practised item
+        targetItem.style.opacity = `0.5`;
+        targetItem.style.pointerEvents = `none`;
+      }
+      //Decrease 1 sec
+      itemDuration--;
+    };
+    //call the timer every second and also immediately
+    tick();
+    const timer = setInterval(tick, 1000);
+    return timer;
   }
   _messageHandler(...msg) {
     messageBox.style.top = '10%';
