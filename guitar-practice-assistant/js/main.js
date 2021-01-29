@@ -40,6 +40,7 @@ class Excercise extends PracticeItem {
 //? APP ARCHITECTURE
 class App {
   _practiceItems = [];
+  _timerActive = false;
 
   constructor() {
     //Get data from localStorage
@@ -154,6 +155,8 @@ class App {
     const durationTarget = targetListElement.querySelector(
       '.practice-item-time-value'
     );
+    //Start/stop btn element
+    const playBtn = e.target.closest('.play-btn');
     //Find ID number
     const itemId = targetListElement.id;
     //Find ID index in the array
@@ -166,8 +169,8 @@ class App {
       this._deleteItem(targetListElement, itemIndex);
     }
     //Start button clicked
-    if (e.target.classList.contains('fa-play-circle')) {
-      this._countDown(durationTarget, itemIndex, targetListElement);
+    if (playBtn) {
+      //this._countDown(durationTarget, itemIndex, targetListElement, playBtn);
     }
   }
 
@@ -180,31 +183,7 @@ class App {
     //Remove from localstorage
     this._setLocalStorage();
   }
-  _countDown(target, i, targetItem) {
-    let itemDuration = this._practiceItems[i].duration;
-    const tick = function () {
-      //converting duration to minutes and second
-      const min = String(Math.trunc(itemDuration / 60)).padStart(2, 0);
-      const sec = String(itemDuration % 60).padStart(2, 0);
 
-      //Display remaining time on screen
-      target.textContent = `${min}:${sec}`;
-      target.style.color = `#ffcb03`;
-      //When 0 sec, stop timer and log out user
-      if (itemDuration === 0) {
-        clearInterval(timer);
-        // Disable practised item
-        targetItem.style.opacity = `0.5`;
-        targetItem.style.pointerEvents = `none`;
-      }
-      //Decrease 1 sec
-      itemDuration--;
-    };
-    //call the timer every second and also immediately
-    tick();
-    const timer = setInterval(tick, 1000);
-    return timer;
-  }
   _messageHandler(...msg) {
     messageBox.style.top = '10%';
     messageBox.textContent = msg;
