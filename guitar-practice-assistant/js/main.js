@@ -46,6 +46,11 @@ class App {
   _itemIndex;
   _playBtn;
   _itemId;
+  _itemDuration;
+  _currentDuration = false;
+  _min;
+  _sec;
+  _timer;
 
   constructor() {
     //Get data from localStorage
@@ -169,6 +174,11 @@ class App {
       .map((item) => item.id)
       .indexOf(this._itemId);
 
+    //Only gets assigned once
+    if (this._currentDuration === false) {
+      this._itemDuration = this._practiceItems[this._itemIndex].duration / 6; //todo
+    }
+
     //Close button clicked
     if (e.target.classList.contains('fa-times')) {
       this._deleteItem();
@@ -181,14 +191,31 @@ class App {
   _startStop() {
     if (this._timerActive) {
       this._playBtn.innerHTML = `<i class="far fa-play-circle  fa-2x"></i>`;
-      //clearTimeout(timer);
+      clearTimeout(this._timer);
     } else {
       this._playBtn.innerHTML = `<i class="far fa-pause-circle fa-2x"></i>`;
-      //timer = setInterval(setTime, 1000);
+      this._timer = setInterval(() => this._setTime(), 1000);
     }
     this._timerActive = !this._timerActive;
   }
+  _setTime() {
+    this._currentDuration = true;
+    this._itemDuration--;
 
+    this._min = String(Math.trunc(this._itemDuration / 60)).padStart(2, 0);
+    this._sec = String(this._itemDuration % 60).padStart(2, 0);
+
+    this._durationTarget.textContent = `${this._min}:${this._sec}`;
+
+    if (this._itemDuration === 0) {
+      clearInterval(this._timer);
+      // Disable practised item
+      this._targetListElement.style.opacity = `0.5`;
+      this._targetListElement.style.pointerEvents = `none`;
+      this._currentDuration = false;
+      this._timerActive = false;
+    }
+  }
   _deleteItem() {
     //remove from array
     this._itemIndex >= 0 && this._practiceItems.splice(this._itemIndex, 1);
