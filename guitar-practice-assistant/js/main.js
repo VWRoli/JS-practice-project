@@ -41,6 +41,11 @@ class Excercise extends PracticeItem {
 class App {
   _practiceItems = [];
   _timerActive = false;
+  _durationTarget;
+  _targetListElement;
+  _itemIndex;
+  _playBtn;
+  _itemId;
 
   constructor() {
     //Get data from localStorage
@@ -150,36 +155,45 @@ class App {
   }
   _clickHandler(e) {
     //Select list practice item
-    const targetListElement = e.target.closest('.list-practice-item');
-    if (targetListElement === null) return;
-    const durationTarget = targetListElement.querySelector(
+    this._targetListElement = e.target.closest('.list-practice-item');
+    if (this._targetListElement === null) return;
+    this._durationTarget = this._targetListElement.querySelector(
       '.practice-item-time-value'
     );
     //Start/stop btn element
-    const playBtn = e.target.closest('.play-btn');
+    this._playBtn = e.target.closest('.play-btn');
     //Find ID number
-    const itemId = targetListElement.id;
+    this._itemId = this._targetListElement.id;
     //Find ID index in the array
-    const itemIndex = this._practiceItems
+    this._itemIndex = this._practiceItems
       .map((item) => item.id)
-      .indexOf(itemId);
+      .indexOf(this._itemId);
 
     //Close button clicked
     if (e.target.classList.contains('fa-times')) {
-      this._deleteItem(targetListElement, itemIndex);
+      this._deleteItem();
     }
     //Start button clicked
-    if (playBtn) {
-      //this._countDown(durationTarget, itemIndex, targetListElement, playBtn);
+    if (this._playBtn) {
+      this._startStop();
     }
   }
+  _startStop() {
+    if (this._timerActive) {
+      this._playBtn.innerHTML = `<i class="far fa-play-circle  fa-2x"></i>`;
+      //clearTimeout(timer);
+    } else {
+      this._playBtn.innerHTML = `<i class="far fa-pause-circle fa-2x"></i>`;
+      //timer = setInterval(setTime, 1000);
+    }
+    this._timerActive = !this._timerActive;
+  }
 
-  _deleteItem(targetItem, i) {
+  _deleteItem() {
     //remove from array
-    i >= 0 && this._practiceItems.splice(i, 1);
+    this._itemIndex >= 0 && this._practiceItems.splice(this._itemIndex, 1);
     //Remove from UI
-    console.log(targetItem);
-    targetItem.remove();
+    this._targetListElement.remove();
     //Remove from localstorage
     this._setLocalStorage();
   }
