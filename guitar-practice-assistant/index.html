@@ -11,6 +11,7 @@
     />
 
     <link rel="stylesheet" href="./css/style.css" />
+    <script defer src="./js/metronome.js"></script>
     <script defer src="./js/main.js"></script>
     <title>Guitar Practice Assistance</title>
   </head>
@@ -80,7 +81,7 @@
           </ul>
         </nav>
         <!--? HOME SECTION -->
-        <section class="home">
+        <!-- <section class="home">
           <h2>Welcome to your Guitar Practice Assistant</h2>
           <p>
             Here you will find everything you need for your practice sessions.
@@ -102,33 +103,37 @@
             Every guitarist should know the notes on the fretboard. Practice<br />
             your notes with a fun game under the Fretboard tab.
           </p>
-        </section>
+        </section> -->
         <!--? METRONOME SECTION -->
-        <!--     <section class="metronome-container">
+        <section class="metronome-container">
           <div class="metronome-start-btn">
             <i class="far fa-play-circle fa-9x gradient-btn"></i>
           </div>
-
+          <div class="bpm-numbers">
+            <h2 class="bpm-label">
+              <span class="bpm-number-display"></span> BPM
+            </h2>
+          </div>
           <div class="controls">
             <button class="control-btn btn-minus">
               <i class="fas fa-minus-square fa-2x"></i>
             </button>
             <form class="bpm">
               <input
-                type="number"
+                type="range"
                 name="bpm-number-input"
                 id="bpm-number-input"
-                min="30"
-                max="220"
+                min="40"
+                max="218"
+                value="120"
               />
-              <label class="bpm-label">BPM</label>
             </form>
 
-            <button class="control-btn btn-minus">
+            <button class="control-btn btn-plus">
               <i class="fas fa-plus-square fa-2x"></i>
             </button>
           </div>
-        </section> -->
+        </section>
       </div>
     </main>
   </body>

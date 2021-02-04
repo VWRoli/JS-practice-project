@@ -248,7 +248,9 @@ button {
   align-items: center;
   overflow: hidden;
 }
-
+.metronome-container > * {
+  margin: 1.5rem 0;
+}
 .metronome-start-btn {
   cursor: pointer;
   justify-self: center;
@@ -264,7 +266,6 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 4rem;
 }
 .control-btn {
   border: none;
@@ -276,29 +277,18 @@ button {
 }
 
 #bpm-number-input {
-  width: 40%;
   margin: 0 1rem;
-  border: none;
-  border-radius: 5px;
-  text-align: right;
+  cursor: pointer;
 }
-.bpm input[type='number'] {
-  font-size: 2rem;
+.bpm {
+  display: flex;
+  flex-direction: column;
 }
-/*HIDING INPUT FIELD ARROWS*/
-/* Chrome, Safari, Edge, Opera */
-.bpm input::-webkit-outer-spin-button,
-.bpm input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-/* Firefox */
-.bpm input[type='number'] {
-  -moz-appearance: textfield;
-}
-
 .bpm-label {
   font-size: 2rem;
   font-weight: 700;
   color: var(--blueColor);
+}
+.bpm-number-display {
+  font-size: 2rem;
 }
