@@ -45,9 +45,12 @@ class Metronome {
   //So we can stop the ticker
   _timeout;
   _expected;
+  _hiHat;
+  _context = new (window.AudioContext || window.webkitAudioContext)();
 
   _metronomeActive = false;
   constructor() {
+    this._fetchAudio();
     //Event handlers
     metronomeStartBtn.addEventListener(
       'click',
@@ -83,33 +86,47 @@ class Metronome {
     let timeDrift = Date.now() - this._expected;
     //Increase expected time with tempo
     this._expected += this._tempo;
-    //!Play sound
-    //!document.getElementById('hi-hat-sound').play();
-    playHiHat();
+    //Play sound
+    this._playHiHat();
     console.log(timeDrift);
+    //Adjust tempo
     this._timeout = setTimeout(this._tick.bind(this), this._tempo - timeDrift);
   }
   //todo error handling when leaving tab
+  _fetchAudio() {
+    fetch('./sounds/hihat.wav')
+      .then((data) => data.arrayBuffer())
+      .then((arrayBuffer) => this._context.decodeAudioData(arrayBuffer))
+      .then((decodedAudio) => {
+        this._hiHat = decodedAudio;
+      });
+  }
+  _playHiHat() {
+    const playSound = this._context.createBufferSource();
+    playSound.buffer = this._hiHat;
+    playSound.connect(this._context.destination);
+    playSound.start(this._context.currentTime);
+  }
 }
 
 const myMetronome = new Metronome();
 
 ////////////////////////////
-const context = new (window.AudioContext || window.webkitAudioContext)();
-let hiHat;
+//const context = new (window.AudioContext || window.webkitAudioContext)();
+//let hiHat;
 
-fetch('./sounds/hihat.wav')
-  .then((data) => data.arrayBuffer())
-  .then((arrayBuffer) => context.decodeAudioData(arrayBuffer))
-  .then((decodedAudio) => {
-    hiHat = decodedAudio;
-  });
+// fetch('./sounds/hihat.wav')
+//   .then((data) => data.arrayBuffer())
+//   .then((arrayBuffer) => context.decodeAudioData(arrayBuffer))
+//   .then((decodedAudio) => {
+//     hiHat = decodedAudio;
+//   });
 
-function playHiHat() {
-  const playSound = context.createBufferSource();
-  playSound.buffer = hiHat;
-  playSound.connect(context.destination);
-  playSound.start(context.currentTime);
-}
+// function playHiHat() {
+//   const playSound = context.createBufferSource();
+//   playSound.buffer = hiHat;
+//   playSound.connect(context.destination);
+//   playSound.start(context.currentTime);
+// }
 
 //window.addEventListener('mousedown', playHiHat);
