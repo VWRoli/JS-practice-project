@@ -14,6 +14,12 @@ const allPracticeItems = document.querySelector('#practice-items');
 
 const messageBox = document.querySelector('.message-box');
 
+const navbar = document.querySelector('.navbar');
+const tabs = document.querySelectorAll('.nav-tab');
+const contents = document.querySelectorAll('.content');
+const homeContent = document.querySelector('.home');
+const metronomeContent = document.querySelector('.metronome-container');
+
 class PracticeItem {
   id = (Date.now() + '').slice(-10);
 
@@ -61,6 +67,7 @@ class App {
     btnSlide.addEventListener('click', this._showHideForm.bind(this));
     form.addEventListener('submit', this._newPracticeItem.bind(this));
     allPracticeItems.addEventListener('click', this._clickHandler.bind(this));
+    navbar.addEventListener('click', this._handleMenuTabs.bind(this));
   }
   //Toggle form
   _showHideForm() {
@@ -243,6 +250,25 @@ class App {
     this._practiceItems = data;
 
     this._practiceItems.forEach((item) => this._addPracticeItem(item));
+  }
+  _handleMenuTabs(e) {
+    const clicked = e.target.closest('.nav-tab');
+    if (!clicked) return;
+
+    const clickedId = clicked.id;
+    //Remove active from all other when clicked
+    tabs.forEach((tab) => tab.classList.remove('nav-active'));
+
+    //Add to the one clicked
+    clicked.classList.add('nav-active');
+
+    if (clickedId === 'home') {
+      metronomeContent.classList.add('hidden');
+      homeContent.classList.remove('hidden');
+    } else {
+      homeContent.classList.add('hidden');
+      metronomeContent.classList.remove('hidden');
+    }
   }
 }
 const app = new App();

@@ -292,3 +292,7 @@ button {
 .bpm-number-display {
   font-size: 2rem;
 }
+
+.hidden {
+  display: none;
+}

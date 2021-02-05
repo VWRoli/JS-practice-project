@@ -94,7 +94,7 @@ class Metronome {
   }
   //todo error handling when leaving tab
   _fetchAudio() {
-    fetch('./sounds/hihat.wav')
+    fetch('./sounds/snare.wav')
       .then((data) => data.arrayBuffer())
       .then((arrayBuffer) => this._context.decodeAudioData(arrayBuffer))
       .then((decodedAudio) => {
@@ -110,23 +110,3 @@ class Metronome {
 }
 
 const myMetronome = new Metronome();
-
-////////////////////////////
-//const context = new (window.AudioContext || window.webkitAudioContext)();
-//let hiHat;
-
-// fetch('./sounds/hihat.wav')
-//   .then((data) => data.arrayBuffer())
-//   .then((arrayBuffer) => context.decodeAudioData(arrayBuffer))
-//   .then((decodedAudio) => {
-//     hiHat = decodedAudio;
-//   });
-
-// function playHiHat() {
-//   const playSound = context.createBufferSource();
-//   playSound.buffer = hiHat;
-//   playSound.connect(context.destination);
-//   playSound.start(context.currentTime);
-// }
-
-//window.addEventListener('mousedown', playHiHat);
