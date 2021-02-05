@@ -4,44 +4,14 @@ const controls = document.querySelector('.controls');
 const bpmNumberInput = document.querySelector('#bpm-number-input');
 const bpmNumberDisplay = document.querySelector('.bpm-number-display');
 
-let bpm = 120;
-
-//Handle bpm changes
-function handleBpm() {
-  if (bpm >= 40 && bpm <= 180) {
-    bpmNumberInput.value = bpm;
-    bpmNumberDisplay.textContent = bpm;
-  }
-}
-handleBpm();
-
-//Change bpm with range slider
-bpmNumberInput.addEventListener('change', function () {
-  bpm = this.value;
-  handleBpm();
-});
-
-//Change bpm with buttons
-controls.addEventListener('click', function (e) {
-  const target = e.target.closest('.control-btn');
-  if (!target) return;
-
-  if (target.classList.contains('btn-plus')) {
-    bpm++;
-    handleBpm();
-  }
-  if (target.classList.contains('btn-minus')) {
-    bpm--;
-    handleBpm();
-  }
-});
+const metronomeStartBtn = document.querySelector('.metronome-start-btn');
 ///////////////////////////////////////////////////////
 //Actual metronome
-const metronomeStartBtn = document.querySelector('.metronome-start-btn');
 
 class Metronome {
+  _bpm = 120;
   //How often we tick
-  _tempo = 500;
+  _tempo;
   //So we can stop the ticker
   _timeout;
   _expected;
@@ -51,18 +21,56 @@ class Metronome {
   _metronomeActive = false;
   constructor() {
     this._fetchAudio();
+    this._handleBpm();
+    this._calcMsTempo();
+
     //Event handlers
     metronomeStartBtn.addEventListener(
       'click',
       this._startStopHandler.bind(this)
     );
+    controls.addEventListener('click', this._handleControls.bind(this));
+    bpmNumberInput.addEventListener('change', this._handleSlider.bind(this));
+  }
+  //BPM handler
+  _handleBpm() {
+    if (this._bpm >= 40 && this._bpm <= 180) {
+      bpmNumberInput.value = this._bpm;
+      bpmNumberDisplay.textContent = this._bpm;
+    }
+    this._calcMsTempo();
+  }
+  //Control handler
+  _handleControls(e) {
+    const target = e.target.closest('.control-btn');
+    if (!target) return;
+
+    if (target.classList.contains('btn-plus')) {
+      this._bpm++;
+      this._handleBpm();
+    }
+    if (target.classList.contains('btn-minus')) {
+      this._bpm--;
+      this._handleBpm();
+    }
+  }
+  //Handle range slider
+  _handleSlider() {
+    this._bpm = bpmNumberInput.value;
+    this._handleBpm();
+  }
+  //Calc tempo
+  _calcMsTempo() {
+    // 1m is 60 000ms
+    //60 000 / bpm = tempo
+    this._tempo = 60000 / this._bpm;
   }
   //Start metronome
   _startMetronome() {
     console.log('Started!');
     //Set expected time
     this._expected = Date.now() + this._tempo;
-    this._timeout = setTimeout(this._tick.bind(this), this._tempo);
+    this._timeout = setTimeout(this._tick.bind(this), this._tempo); //todo
   }
   //Stop metronome
   _stopMetronome() {
@@ -92,7 +100,6 @@ class Metronome {
     //Adjust tempo
     this._timeout = setTimeout(this._tick.bind(this), this._tempo - timeDrift);
   }
-  //todo error handling when leaving tab
   _fetchAudio() {
     fetch('./sounds/snare.wav')
       .then((data) => data.arrayBuffer())

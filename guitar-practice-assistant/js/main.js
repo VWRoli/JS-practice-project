@@ -258,10 +258,9 @@ class App {
     const clickedId = clicked.id;
     //Remove active from all other when clicked
     tabs.forEach((tab) => tab.classList.remove('nav-active'));
-
     //Add to the one clicked
     clicked.classList.add('nav-active');
-
+    //Hide and show content
     if (clickedId === 'home') {
       metronomeContent.classList.add('hidden');
       homeContent.classList.remove('hidden');
