@@ -183,7 +183,7 @@ class App {
 
     //Only gets assigned once
     if (this._currentDuration === false) {
-      this._itemDuration = this._practiceItems[this._itemIndex].duration / 6; //todo
+      this._itemDuration = this._practiceItems[this._itemIndex].duration;
     }
 
     //Close button clicked
