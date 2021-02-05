@@ -100,7 +100,7 @@ body {
   background: linear-gradient(to top left, #39b385, #9be15d);
 }
 .card-back {
-  background: linear-gradient(to top left, #e52a5a, #ff585f);
+  /* background: linear-gradient(to top left, #e52a5a, #ff585f); */
   transform: rotateY(180deg);
   display: grid;
   place-items: center;
