@@ -2,7 +2,7 @@
 //Variables
 //const cardEl = document.querySelectorAll('.card-items');
 //const cardBackEl = document.querySelectorAll('.card-back');
-//const cardWrapperEl = document.querySelectorAll('.card-wrapper');
+
 const startBtnEl = document.querySelector('.start-btn');
 const showcaseEl = document.querySelector('.showcase');
 const gameEl = document.querySelector('.game');
@@ -30,7 +30,8 @@ const cardsArray = [
 
 let time = 0;
 let timer, min, sec, newCardsArray;
-const faceUpArray = [];
+let faceUpCardsArray = [];
+let matchedCardsArray = [];
 
 //Event listeners
 startBtnEl.addEventListener('click', startNewGame);
@@ -103,30 +104,61 @@ function createCards({ id, icon, color }) {
 function setCards() {
   newCardsArray.map((card) => (card.innerHTML = card.icon));
 }
+//////////////////////////////////////////////////////////////
+//flip cards
+//max 2 cards at a time
+//when 2 cards flipped compare
+//if same push them into new array
+//delete them  from boards
+//if not cont game, delete
 
 //Flip cards
 function flipCards(e) {
   const clicked = e.target.closest('.card-items');
   if (!clicked) return;
   clicked.firstElementChild.classList.toggle('active');
+
+  //push flipped cards into an array
   let flippedCard = clicked.querySelector('.card-back').innerHTML;
-  //push these into an array
-  faceUpArray.push(flippedCard);
-  console.log(faceUpArray);
-  //max is two
+  faceUpCardsArray.push(flippedCard);
+
+  const cardWrapperEl = document.querySelectorAll('.card-wrapper');
+
+  //If two cards are face up
+  if (faceUpCardsArray.length === 2) {
+    //compare
+    compareCards(faceUpCardsArray, cardWrapperEl);
+    faceUpCardsArray = [];
+  }
 }
 
 //Handle face up cards
-function faceUpCards(card1, card2) {
+function faceUpCards(cards) {
   //Create array for them
-  faceUpArray = [card1, card2];
+  console.log(cards);
+  //if cards array is 2 === 0
+  //turn down cards
   //push their icon
+  return cards;
 }
 
-function compareCards() {
+function compareCards(cards, allCards) {
   //compare two array items
+  if (cards[0] === cards[1]) {
+    console.log('Match');
+    matchedCardsArray.push(cards[0]);
+    matchedCardsArray.push(cards[1]);
+    console.log(matchedCardsArray);
+  } else {
+    console.log('Not match');
+    //Flip back unmatched cards
+    setTimeout(() => {
+      allCards.forEach((card) => card.classList.remove('active'));
+    }, 1000);
+  }
 }
 
+////////////////////////////////////////////////
 //Schuffle and create new array of cards
 function shuffleArray(array) {
   const shuffledArray = array.slice();
