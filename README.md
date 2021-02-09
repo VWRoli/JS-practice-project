@@ -15,3 +15,8 @@ Guess the notes on the fretboard.
 [Tic Tac Toe game](https://codepen.io/VWRoli/pen/oNzddwg)
 
 Simple Multiplayer Tic Tac Toe game, Player 1 is always X and Player 2 is always O. They take turns starting the game.
+
+
+[Rock-Paper-Scissors game](https://codepen.io/VWRoli/pen/jOMdxad)
+
+Simple Rock-Paper-Scissors built with vanilla JS.
