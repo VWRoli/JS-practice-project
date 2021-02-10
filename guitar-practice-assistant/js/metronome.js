@@ -13,7 +13,7 @@ const metronomeStartBtn = document.querySelector('.metronome-start-btn');
 class Metronome {
   _bpm = 120;
   _metronomeActive = false;
-  _loopBeat;
+  _loop;
   _synth;
 
   constructor() {
@@ -58,20 +58,20 @@ class Metronome {
     //Create Synth
     this._synth = new Tone.Synth({
       oscillator: { type: 'triangle' },
-      envelope: { attack: 0 },
+      envelope: { attack: 0, decay: 0, sustain: 1.0, release: 0.9 },
     }).toDestination();
 
-    this._loopBeat = new Tone.Loop(this._sound.bind(this), '4n');
+    this._loop = new Tone.Loop(this._sound.bind(this), '4n');
 
     //Set bpm
     Tone.Transport.bpm.value = this._bpm;
     //Start sound
     Tone.Transport.start();
-    this._loopBeat.start(0);
+    this._loop.start(0);
   }
   //Stop metronome
   _stopMetronome() {
-    this._loopBeat.stop();
+    this._loop.stop();
   }
   //Handle start and stop function
   _startStopHandler() {
@@ -86,7 +86,7 @@ class Metronome {
   }
 
   _sound(time) {
-    this._synth.triggerAttackRelease('A5', 0.03, time);
+    this._synth.triggerAttackRelease('A3', 0.03, time);
   }
 }
 
