@@ -6,7 +6,7 @@ Collection place for my Javascript projects.
 
 [Memory Card Game](https://codepen.io/VWRoli/pen/MWjqVpg)
 
-Good old memory card game. Just turn over the cards and find the matching ones.
+Memory card game. Just turn over the cards and find the matching ones.
 
 [Guitar Fretboard memorization](https://codepen.io/VWRoli/pen/yLaKmNE)
 
