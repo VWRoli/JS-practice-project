@@ -1,5 +1,7 @@
 'use strict';
 
+import * as Tone from 'tone';
+
 const controls = document.querySelector('.controls');
 const bpmNumberInput = document.querySelector('#bpm-number-input');
 const bpmNumberDisplay = document.querySelector('.bpm-number-display');
@@ -10,19 +12,12 @@ const metronomeStartBtn = document.querySelector('.metronome-start-btn');
 
 class Metronome {
   _bpm = 120;
-  //How often we tick
-  _tempo;
-  //So we can stop the ticker
-  _timeout;
-  _expected;
-  _hiHat;
-  _context = new (window.AudioContext || window.webkitAudioContext)();
-
   _metronomeActive = false;
+  _loopBeat;
+  _synth;
+
   constructor() {
-    this._fetchAudio();
     this._handleBpm();
-    this._calcMsTempo();
 
     //Event handlers
     metronomeStartBtn.addEventListener(
@@ -38,7 +33,6 @@ class Metronome {
       bpmNumberInput.value = this._bpm;
       bpmNumberDisplay.textContent = this._bpm;
     }
-    this._calcMsTempo();
   }
   //Control handler
   _handleControls(e) {
@@ -59,23 +53,25 @@ class Metronome {
     this._bpm = bpmNumberInput.value;
     this._handleBpm();
   }
-  //Calc tempo
-  _calcMsTempo() {
-    // 1m is 60 000ms
-    //60 000 / bpm = tempo
-    this._tempo = 60000 / this._bpm;
-  }
   //Start metronome
   _startMetronome() {
-    console.log('Started!');
-    //Set expected time
-    this._expected = Date.now() + this._tempo;
-    this._timeout = setTimeout(this._tick.bind(this), this._tempo); //todo
+    //Create Synth
+    this._synth = new Tone.Synth({
+      oscillator: { type: 'triangle' },
+      envelope: { attack: 0 },
+    }).toDestination();
+
+    this._loopBeat = new Tone.Loop(this._sound.bind(this), '4n');
+
+    //Set bpm
+    Tone.Transport.bpm.value = this._bpm;
+    //Start sound
+    Tone.Transport.start();
+    this._loopBeat.start(0);
   }
   //Stop metronome
   _stopMetronome() {
-    clearTimeout(this._timeout);
-    console.log('Stopped!');
+    this._loopBeat.stop();
   }
   //Handle start and stop function
   _startStopHandler() {
@@ -88,31 +84,9 @@ class Metronome {
     }
     this._metronomeActive = !this._metronomeActive;
   }
-  //Ticker, runs and adjusts the time
-  _tick() {
-    //How much do we drift from expected time
-    let timeDrift = Date.now() - this._expected;
-    //Increase expected time with tempo
-    this._expected += this._tempo;
-    //Play sound
-    this._playHiHat();
-    console.log(timeDrift);
-    //Adjust tempo
-    this._timeout = setTimeout(this._tick.bind(this), this._tempo - timeDrift);
-  }
-  _fetchAudio() {
-    fetch('./sounds/snare.wav')
-      .then((data) => data.arrayBuffer())
-      .then((arrayBuffer) => this._context.decodeAudioData(arrayBuffer))
-      .then((decodedAudio) => {
-        this._hiHat = decodedAudio;
-      });
-  }
-  _playHiHat() {
-    const playSound = this._context.createBufferSource();
-    playSound.buffer = this._hiHat;
-    playSound.connect(this._context.destination);
-    playSound.start(this._context.currentTime);
+
+  _sound(time) {
+    this._synth.triggerAttackRelease('A5', 0.03, time);
   }
 }
 
