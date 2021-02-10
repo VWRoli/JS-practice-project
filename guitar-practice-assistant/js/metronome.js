@@ -86,7 +86,7 @@ class Metronome {
   }
 
   _sound(time) {
-    this._synth.triggerAttackRelease('A3', 0.03, time);
+    this._synth.triggerAttackRelease('A4', 0.03, time);
   }
 }
 
