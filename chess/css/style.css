@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;500&display=swap');
+/*? GLOBAL */
+:root {
+  --mainBgColor: #f3f3f3;
+  --lightColor: #fff;
+  --boardColor: #999;
+  --btnColor: linear-gradient(to top left, #ffb003, #ffcb03);
+}
+* {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+  font-size: 22px;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color: var(--mainTextColor);
+}
+body {
+  background-color: var(--mainBgColor);
+  height: 100vh;
+  display: grid;
+  place-items: center;
+}
+
+/*? GLOBAL */
+#board {
+  color: var(--lightColor);
+  background-color: var(--boardColor);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  /* //grid-gap: 0.25rem; */
+  padding: 0.25rem;
+}
+.square {
+  height: 3.5rem;
+  width: 3.5rem;
+  background-color: var(--lightColor);
+}
+.square:nth-child(-2n + 8),
+.square:nth-child(8) ~ div:nth-child(-2n + 15),
+.square:nth-child(16) ~ div:nth-child(-2n + 24),
+.square:nth-child(24) ~ div:nth-child(-2n + 31),
+.square:nth-child(32) ~ div:nth-child(-2n + 40),
+.square:nth-child(40) ~ div:nth-child(-2n + 47),
+.square:nth-child(48) ~ div:nth-child(-2n + 56),
+.square:nth-child(56) ~ div:nth-child(-2n + 63) {
+  background-color: var(--boardColor);
+}
