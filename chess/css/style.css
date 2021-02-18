@@ -4,6 +4,7 @@
   --mainBgColor: #f3f3f3;
   --lightColor: #fff;
   --boardColor: #999;
+  --darkColor: #222;
   --btnColor: linear-gradient(to top left, #ffb003, #ffcb03);
 }
 * {
@@ -28,13 +29,18 @@ body {
   background-color: var(--boardColor);
   display: grid;
   grid-template-columns: repeat(8, 1fr);
-  /* //grid-gap: 0.25rem; */
   padding: 0.25rem;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.66);
 }
 .square {
   height: 3.5rem;
   width: 3.5rem;
   background-color: var(--lightColor);
+  position: relative;
+  display: grid;
+  place-items: center;
+  color: var(--darkColor);
+  font-size: 2.5rem;
 }
 .square:nth-child(-2n + 8),
 .square:nth-child(8) ~ div:nth-child(-2n + 15),
@@ -45,4 +51,12 @@ body {
 .square:nth-child(48) ~ div:nth-child(-2n + 56),
 .square:nth-child(56) ~ div:nth-child(-2n + 63) {
   background-color: var(--boardColor);
+}
+
+.square span {
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  font-size: 0.5rem;
+  color: var(--darkColor);
 }
