@@ -25,10 +25,10 @@ const squareElements = document.querySelectorAll('.square');
 let board = chess.board().flat();
 console.log(board);
 
-//Render board to display
-function setPieces(el, i) {
-  //console.log(board[i]);
-  //change piecees
+//Render pieces to display
+function renderPieces(el, i) {
+  //todo Will need to rearrange this if soup
+  //Render piecees
   //!Render white pawns
   if (board[i] !== null) {
     if (board[i].type === 'p' && board[i].color === 'w') {
@@ -77,11 +77,35 @@ function setPieces(el, i) {
 }
 
 //Make moves
-chess.move('e4');
-chess.move('e5');
-chess.move('f4');
+// chess.move('e4');
+// chess.move('e5');
+// chess.move('f4');
+//chess.move('Qh4');
 
 //Update board
 board = chess.board().flat();
+
 //Render board to display
-squareElements.forEach(setPieces);
+squareElements.forEach(renderPieces);
+
+////////////////////////
+
+boardElement.addEventListener('mousedown', function (e) {
+  const squareId = e.target.id;
+
+  //Return the piece on the square:
+  const targetPiece = chess.get(`${squareId}`);
+  //console.log(targetPiece);
+
+  //Return a list of legal moves
+  const legalMoves = chess.moves();
+
+  colorLegalMoves(legalMoves, targetPiece);
+});
+
+//Color legal move squares
+function colorLegalMoves(moves, target) {
+  //Filter the ones that I hover over
+  console.log(moves);
+  console.log(target);
+}
