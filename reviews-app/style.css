@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap');
 /*? GLOBAL */
 :root {
-  --mainColor: rgb(194, 226, 255);
+  --mainColor: #c2e2ff;
   --secondaryColor: #f0f8ff;
   --alternativeColor: #00abed;
-  --textColor: rgb(32, 32, 32);
+  --textColor: #202020;
   --lightBg: #fff;
 }
 * {
@@ -49,8 +49,6 @@ h1 {
   border-radius: 50%;
   background: #fff;
   box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 /*? TEXT */
@@ -73,7 +71,6 @@ h1 {
   font-size: 18px;
 }
 .review #left {
-  /*TODO should not get into text */
   color: var(--mainColor);
   position: absolute;
   top: 0.5rem;
@@ -118,7 +115,7 @@ h1 {
 }
 
 /*? BUTTON */
-#button {
+#random {
   border: 5px solid var(--mainColor);
   border-radius: 15px;
   padding: 0.5rem 1rem;
@@ -128,7 +125,7 @@ h1 {
   outline: none;
 }
 
-#button:hover {
+#random:hover {
   border-color: var(--alternativeColor);
 }
 
